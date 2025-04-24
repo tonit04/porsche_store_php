@@ -6,7 +6,19 @@ class CarAdminController
     public function index()
     {
         $car = new Car();
-        $cars = $car->getAll();
+
+        // Lấy số trang hiện tại từ URL, mặc định là 1
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        if ($page < 1)
+            $page = 1;
+
+        $limit = 4; // Số xe mỗi trang
+        $offset = ($page - 1) * $limit;
+
+        $cars = $car->getPaginated($limit, $offset); // Gọi hàm mới
+        $totalCars = $car->countCars(); // Tổng số xe
+        $totalPages = ceil($totalCars / $limit);
+
         require_once './views/admin/car_list.php';
     }
 

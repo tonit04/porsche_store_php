@@ -27,11 +27,11 @@
 
 <body class="bg-light">
 
-    <div class="container py-5">
+    <div class="container-fluid py-5">
         <h1 class="text-center mb-4">Danh sách xe Porsche</h1>
 
         <table class="table table-bordered table-hover align-middle">
-            <thead class="table-dark">
+            <thead class="table-info">
                 <tr>
                     <th>Ảnh</th>
                     <th>Tên xe</th>
@@ -93,13 +93,28 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        <?php if ($totalPages > 1): ?>
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                            <a class="page-link" href="index.php?controller=CarAdmin&action=index&page=<?= $i ?>">
+                                <?= $i ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+        <?php endif; ?>
+        <p>Tong so xe: <?php echo"$totalCars" ?></p>
+        <!-- Nút thêm xe mới -->
+        <div class="text-center mt-4">
+            <a href="index.php?controller=CarAdmin&action=create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Thêm xe mới
+            </a>
+        </div>
     </div>
-    <!-- Nút thêm xe mới -->
-    <div class="text-center mt-4">
-        <a href="index.php?controller=CarAdmin&action=create" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Thêm xe mới
-        </a>
-    </div>
+
 
 
 </body>

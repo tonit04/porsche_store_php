@@ -30,6 +30,34 @@ class Car
 
         return $cars; // Trả về mảng các object Car
     }
+    // Đếm tổng số xe
+    public function countCars()
+    {
+        $stmt = $this->conn->query("SELECT COUNT(*) FROM cars");
+        return $stmt->fetchColumn();
+    }
+
+    // Lấy xe có phân trang
+    public function getPaginated($limit, $offset)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM cars LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $dataList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $cars = [];
+        foreach ($dataList as $data) {
+            $car = new Car();
+            foreach ($data as $key => $value) {
+                $car->$key = $value;
+            }
+            $cars[] = $car;
+        }
+
+        return $cars;
+    }
 
     public function findById($id)
     {
@@ -37,7 +65,7 @@ class Car
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['id' => $id]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if ($data) {
             $car = new Car();
             // Gán dữ liệu vào thuộc tính của $car
@@ -46,7 +74,7 @@ class Car
             }
             return $car;
         }
-    
+
         return null;
     }
 

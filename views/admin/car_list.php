@@ -55,32 +55,32 @@
                     <?php foreach ($cars as $car): ?>
                         <tr>
                             <td>
-                                <?php if (!empty($car['image_url'])): ?>
-                                    <img src="assets/images/cars/<?= htmlspecialchars($car['image_url']) ?>"
-                                        alt="<?= htmlspecialchars($car['name']) ?>">
+                                <?php if (!empty($car->image_url)): ?>
+                                    <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>"
+                                        alt="<?= htmlspecialchars($car->name) ?>">
                                 <?php else: ?>
                                     <span class="text-muted">Không có ảnh</span>
                                 <?php endif; ?>
                             </td>
-                            <td><?= htmlspecialchars($car['name']) ?></td>
-                            <td><?= htmlspecialchars($car['slug']) ?></td>
-                            <td><?= htmlspecialchars($car['year']) ?></td>
-                            <td><?= htmlspecialchars($car['color']) ?></td>
-                            <td><?= htmlspecialchars($car['engine']) ?></td>
-                            <td><?= htmlspecialchars($car['horsepower']) ?> HP</td>
-                            <td><?= htmlspecialchars($car['max_speed']) ?> km/h</td>
-                            <td><?= htmlspecialchars($car['transmission']) ?></td>
-                            <td><?= htmlspecialchars($car['fuel_type']) ?></td>
-                            <td><?= number_format($car['price'], 0, ',', '.') ?>₫</td>
-                            <td><?= htmlspecialchars($car['stock']) ?></td>
-                            <td class="status-<?= strtolower($car['status']) ?>">
-                                <?= $car['status'] === 'active' ? 'Đang bán' : 'Ngừng bán' ?>
+                            <td><?= htmlspecialchars($car->name) ?></td>
+                            <td><?= htmlspecialchars($car->slug) ?></td>
+                            <td><?= htmlspecialchars($car->year) ?></td>
+                            <td><?= htmlspecialchars($car->color) ?></td>
+                            <td><?= htmlspecialchars($car->engine) ?></td>
+                            <td><?= htmlspecialchars($car->horsepower) ?> HP</td>
+                            <td><?= htmlspecialchars($car->max_speed) ?> km/h</td>
+                            <td><?= htmlspecialchars($car->transmission) ?></td>
+                            <td><?= htmlspecialchars($car->fuel_type) ?></td>
+                            <td><?= number_format($car->price, 0, ',', '.') ?>₫</td>
+                            <td><?= htmlspecialchars($car->stock) ?></td>
+                            <td class="status-<?= strtolower($car->status) ?>">
+                                <?= $car->status === 'active' ? 'Đang bán' : 'Ngừng bán' ?>
                             </td>
-                            <td><?= htmlspecialchars($car['description']) ?></td>
+                            <td><?= htmlspecialchars($car->description) ?></td>
                             <td>
-                                <a href="index.php?controller=CarAdmin&action=edit&id=<?= $car['id'] ?>"
+                                <a href="index.php?controller=CarAdmin&action=update&id=<?= $car->id ?>"
                                     class="btn btn-sm btn-warning mb-1">Sửa</a>
-                                <a href="index.php?controller=CarAdmin&action=delete&id=<?= $car['id'] ?>"
+                                <a href="index.php?controller=CarAdmin&action=delete&id=<?= $car->id ?>"
                                     class="btn btn-sm btn-danger"
                                     onclick="return confirm('Bạn có chắc muốn xóa xe này?')">Xóa</a>
                             </td>

@@ -5,9 +5,9 @@ class CarAdminController
 {
     public function index()
     {
-        $carModel = new Car();
-        $cars = $carModel->getAll();
-        require_once './views/car_list.php';
+        $car = new Car();
+        $cars = $car->getAll();
+        require_once './views/admin/car_list.php';
     }
 
     public function create()
@@ -26,27 +26,10 @@ class CarAdminController
                     $imageUrl = $imageName; // Lưu tên ảnh vào cơ sở dữ liệu
                 }
             }
-            // Lấy dữ liệu từ form
-            $data = [
-                'name' => $_POST['name'],
-                'slug' => $_POST['slug'],
-                'year' => $_POST['year'],
-                'color' => $_POST['color'],
-                'engine' => $_POST['engine'],
-                'horsepower' => $_POST['horsepower'],
-                'max_speed' => $_POST['max_speed'],
-                'transmission' => $_POST['transmission'],
-                'fuel_type' => $_POST['fuel_type'],
-                'price' => $_POST['price'],
-                'stock' => $_POST['stock'],
-                'description' => $_POST['description'],
-                'status' => $_POST['status'],
-                'image_url' => $imageUrl 
-            ];
-
             // Tạo xe mới
-            $carModel = new Car();
-            $carModel->create($data);
+            $car = new Car();
+            // $car->create($data);
+            $car->create($_POST, $imageUrl);
 
             // Redirect về trang danh sách xe
             header('Location: index.php?controller=CarAdmin');
@@ -54,29 +37,42 @@ class CarAdminController
         }
 
         // Hiển thị form thêm xe
-        require_once './views/car_create.php';
+        require_once './views/admin/car_create.php';
     }
 
-    public function edit()
+    public function update()
     {
-        $carModel = new Car();
+        $car = new Car();
         $id = $_GET['id'];
-        $car = $carModel->findById($id);
+        $car = $car->findById($id); // $car giờ là object Car
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $carModel->update($id, $_POST);
+            // Kiểm tra xem có file ảnh được tải lên không
+            $imageUrl = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                // Lấy thông tin ảnh
+                $imageTmpPath = $_FILES['image']['tmp_name'];
+                $imageName = $_FILES['image']['name'];
+                $imagePath = 'assets/images/cars/' . basename($imageName);
+
+                // Di chuyển ảnh đến thư mục đích
+                if (move_uploaded_file($imageTmpPath, $imagePath)) {
+                    $imageUrl = $imageName; // Lưu tên ảnh vào cơ sở dữ liệu
+                }
+            }
+            $car->update($id, $_POST, $imageUrl);
             header('Location: index.php?controller=CarAdmin');
             exit;
         }
 
-        require_once './views/car_edit.php';
+        require_once './views/admin/car_update.php';
     }
 
     public function delete()
     {
-        $carModel = new Car();
+        $car = new Car();
         $id = $_GET['id'];
-        $carModel->delete($id);
+        $car->delete($id);
         header('Location: index.php?controller=CarAdmin');
         exit;
     }

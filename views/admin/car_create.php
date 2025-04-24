@@ -19,6 +19,15 @@
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Model</label>
+                    <select name="model_id" class="form-control" required>
+                        <option value="">Chọn model</option>
+                        <?php foreach ($models as $model): ?>
+                            <option value="<?= $model->id ?>"><?= $model->name ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
                     <label for="slug" class="form-label">Slug</label>
                     <input type="text" class="form-control" id="slug" name="slug" required>
                 </div>

@@ -40,14 +40,14 @@ class CarAdminController
             }
             // Tạo xe mới
             $car = new Car();
-            // $car->create($data);
             $car->create($_POST, $imageUrl);
 
             // Redirect về trang danh sách xe
             header('Location: index.php?controller=CarAdmin');
             exit;
         }
-
+        $car = new Car();
+        $models = $car->getAllModels();
         // Hiển thị form thêm xe
         require_once './views/admin/car_create.php';
     }
@@ -72,11 +72,14 @@ class CarAdminController
                     $imageUrl = $imageName; // Lưu tên ảnh vào cơ sở dữ liệu
                 }
             }
+            else{
+                $imageUrl = $car->image_url;
+            }
             $car->update($id, $_POST, $imageUrl);
             header('Location: index.php?controller=CarAdmin');
             exit;
         }
-
+        $models = $car->getAllModels();
         require_once './views/admin/car_update.php';
     }
 

@@ -35,6 +35,7 @@
                 <tr>
                     <th>Ảnh</th>
                     <th>Tên xe</th>
+                    <th>Model</th>
                     <th>Slug</th>
                     <th>Năm</th>
                     <th>Màu</th>
@@ -63,6 +64,7 @@
                                 <?php endif; ?>
                             </td>
                             <td><?= htmlspecialchars($car->name) ?></td>
+                            <td><?= $car->model->name ?? 'Không xác định' ?></td>
                             <td><?= htmlspecialchars($car->slug) ?></td>
                             <td><?= htmlspecialchars($car->year) ?></td>
                             <td><?= htmlspecialchars($car->color) ?></td>

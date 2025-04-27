@@ -5,6 +5,7 @@ $actionName = $_GET['action'] ?? 'index';
 // Chuẩn hóa tên
 $controllerClass = ucfirst($controllerName) . 'Controller';
 $controllerFile = __DIR__ . '/controllers/' . $controllerClass . '.php';
+session_start();
 
 // Kiểm tra và gọi Controller
 if (file_exists($controllerFile)) {

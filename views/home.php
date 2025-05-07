@@ -11,6 +11,8 @@
     <h2>Chọn chức năng để kiểm thử:</h2>
     <ul>
         <li><a href="index.php?controller=CarAdmin&action=index">Xem danh sách xe</a></li>
+        <li><a href="index.php?controller=UserAdmin&action=index">Xem danh sách nguoi dung</a></li>
+        <li><a href="index.php?controller=OrderAdmin&action=index">Xem danh sách don hang</a></li>
         <li><a href="index.php?controller=User&action=login">Dang nhập</a></li>
         <li><a href="index.php?controller=User&action=register">Dang kí</a></li>
         <li><a href="index.php?controller=Product&action=Details&id=1">Car details</a></li>

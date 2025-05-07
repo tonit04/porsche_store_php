@@ -1,5 +1,6 @@
 <?php
 require_once './models/Order.php';
+require_once './models/OrderDetail.php';
 
 class OrderAdminController
 {
@@ -37,9 +38,9 @@ class OrderAdminController
 
     public function detail()
     {
-        $order = new Order();
-        $id = $_GET['id'];
-        $order = $order->findById($id);
+        $orderDetail = new OrderDetail();
+        $order_id = $_GET['id'];
+        $orderDetails = $orderDetail->findById($order_id);
         require_once './views/admin/order_detail.php';
     }
 

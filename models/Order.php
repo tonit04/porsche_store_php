@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../config/Database.php';
-
 class Order
 {
     public $id, $user_id, $order_date, $total_amount, $status, $payment_method, $note;
+    public $user;
     private $conn;
 
     public function __construct()
@@ -27,6 +27,7 @@ class Order
             foreach ($data as $key => $value) {
                 $order->$key = $value;
             }
+            $order->user = $this->getUserByUser_id($order->user_id);
             $orders[] = $order;
         }
 
@@ -47,14 +48,15 @@ class Order
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
-            $user = new User();
+            $order = new Order();
             foreach ($data as $key => $value) {
-                $user->$key = $value;
+                $order->$key = $value;
             }
-            return $user;
+            return $order;
         }
         return null;
     }
+
     public function update($id, $data)
     {
         $sql = "UPDATE orders SET                     
@@ -72,5 +74,22 @@ class Order
         $sql = "DELETE FROM orders WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute(['id' => $id]);
+    }
+
+    public function getUserByUser_id($user_id)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['id' => $user_id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($data) {
+            $user = new stdClass();
+            $user->id = $data['id'];
+            $user->full_name = $data['full_name'];
+            return $user;
+        } else {
+            return null;
+        }
     }
 }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách người dùng</title>
+    <title>Danh sách đơn hàng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -18,6 +18,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Mã khách hàng</th>
+                    <th>Tên khách hàng</th>
                     <th>Ngày đặt</th>
                     <th>Trạng thái</th>
                     <th>Tổng tiền</th>
@@ -32,12 +33,12 @@
                         <tr>
                             <td><?= htmlspecialchars($order->id) ?></td>
                             <td><?= htmlspecialchars($order->user_id) ?></td>
+                            <td><?= htmlspecialchars($order->user->full_name) ?></td>
                             <td><?= htmlspecialchars($order->order_date) ?></td>
                             <td><?= htmlspecialchars($order->status) ?></td>
-                            <td><?= htmlspecialchars($order->total_amount) ?></td>
+                            <td><?= number_format($order->total_amount, 0, ',', '.') ?> VND</td>
                             <td><?= htmlspecialchars($order->payment_method) ?></td>
                             <td><?= htmlspecialchars($order->note) ?></td>
-                           
                             <td>
                                 <a href="index.php?controller=OrderAdmin&action=detail&id=<?= $order->id ?>"
                                     class="btn btn-sm btn-warning mb-1">Xem chi tiết</a>

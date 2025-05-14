@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,50 +113,51 @@
 
     <!-- Fruits Shop Start-->
     <!-- Fruits Shop Start-->
-<div class="container-fluid py-5">
+    <div class="container-fluid py-5">
 
-<div class="container mt-5 d-flex justify-content-center">
-        <!-- Đăng nhập -->
-    <div class="col-md-5 border border-dark p-4 rounded shadow">
-            <h3 class="text-center">ĐĂNG NHẬP</h3>
-            <form method="POST">
-                <div class="text-danger">
-                    <?php if (!empty($error)) echo "<p>$error</p>"; ?>
-                </div>
-            
-                <div class="mb-3">
-                    <input required name="username"  type="text" class="form-control" placeholder="Username" >
-                </div>
-                
-                <div class="mb-3">
-                    <input required name="password" type="password" class="form-control" placeholder="Mật khẩu">
+        <div class="container mt-5 d-flex justify-content-center">
+            <!-- Đăng nhập -->
+            <div class="col-md-5 border border-dark p-4 rounded shadow">
+                <h3 class="text-center">ĐĂNG NHẬP</h3>
+                <form method="POST">
+                    <div class="text-danger">
+                        <?php if (!empty($error)) echo "<p>$error</p>"; ?>
+                    </div>
 
+                    <div class="mb-3">
+                        <input required name="username" type="text" class="form-control" placeholder="Username">
+                    </div>
+
+                    <div class="mb-3">
+                        <input required name="password" type="password" class="form-control" placeholder="Mật khẩu">
+
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-dark w-50">
+                            Đăng
+                            nhập
+                        </button>
+                    </div>
+
+                </form>
+                <a href="index.php?controller=User&action=register">Đăng ký</a>
+                <hr>
+                <div class="d-flex justify-content-center pb-4">
+                    <button class="btn btn-white border-dark me-3">
+                        <img class="mx-2" src="~/Assets/img/iconGG.png"
+                            width="20px">Google
+                    </button>
+                    <button class="btn btn-white border-dark">
+                        <img class="mx-2" src="~/Assets/img/iconFF.png"
+                            width="20px">Facebook
+                    </button>
                 </div>
-                <div class="text-center">
-                <button type="submit" class="btn btn-dark w-50">
-                    Đăng
-                    nhập
-                </button>
-                </div>
-                
-            </form>
-            <hr>
-            <div class="d-flex justify-content-center pb-4">
-                <button class="btn btn-white border-dark me-3">
-                    <img class="mx-2" src="~/Assets/img/iconGG.png"
-                         width="20px">Google
-                </button>
-                <button class="btn btn-white border-dark">
-                    <img class="mx-2" src="~/Assets/img/iconFF.png"
-                         width="20px">Facebook
-                </button>
             </div>
-        </div>
 
-        <!-- Đường kẻ giữa -->
-        
+            <!-- Đường kẻ giữa -->
+
+        </div>
     </div>
-</div>
 
     <!-- Fruits Shop End-->
 

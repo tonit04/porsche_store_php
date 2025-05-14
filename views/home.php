@@ -16,6 +16,9 @@
         <li><a href="index.php?controller=User&action=login">Dang nhập</a></li>
         <li><a href="index.php?controller=User&action=register">Dang kí</a></li>
         <li><a href="index.php?controller=Product&action=Details&id=1">Car details</a></li>
+        <li><a href="index.php?controller=Cart&action=ShowCart">Show cart</a></li>
+
+
 
 
 

@@ -71,8 +71,7 @@ class CarAdminController
                 if (move_uploaded_file($imageTmpPath, $imagePath)) {
                     $imageUrl = $imageName; // Lưu tên ảnh vào cơ sở dữ liệu
                 }
-            }
-            else{
+            } else {
                 $imageUrl = $car->image_url;
             }
             $car->update($id, $_POST, $imageUrl);
@@ -92,5 +91,3 @@ class CarAdminController
         exit;
     }
 }
-
-?>

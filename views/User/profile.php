@@ -114,188 +114,188 @@
 
     <!-- Fruits Shop Start-->
     <!-- Fruits Shop Start-->
-<div class="container-fluid py-5">
+    <div class="container-fluid py-5">
 
-<!-- Fruits Shop Start-->
-<div class="container mt-5">
-        <h2 class="text-center mb-4">Thông Tin Cá Nhân</h2>
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title"><strong>Họ và Tên:</strong> Trần thị ;an</h5>
-                <p class="card-text"><strong>Email:</strong> kh01@gmail.com</p>
-                <p class="card-text"><strong>Số Điện Thoại:</strong> 0398926997</p>
-                <p class="card-text"><strong>Địa Chỉ:</strong> 123 đường D, quận 4 TPHCM</p>
+        <!-- Fruits Shop Start-->
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Thông Tin Cá Nhân</h2>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Họ và Tên:</strong> Trần thị ;an</h5>
+                    <p class="card-text"><strong>Email:</strong> kh01@gmail.com</p>
+                    <p class="card-text"><strong>Số Điện Thoại:</strong> 0398926997</p>
+                    <p class="card-text"><strong>Địa Chỉ:</strong> 123 đường D, quận 4 TPHCM</p>
+                </div>
             </div>
-        </div>
 
-        <h2 class="text-center mb-4">Đơn Hàng Của Bạn</h2>
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Ngày Đặt</th>
-                                <th>Trạng Thái</th>
-                                <th>Tổng Tiền</th>
-                                <th>Địa Chỉ Giao</th>
-                                <th>Chi Tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-                            <tr>
-                                <td>3/30/2025 6:32:43 PM</td>
-                                <td class="text-danger">Đang xử lý</td>
-                                <td>745,000 VND</td>
-                                <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                <td>
-                                    <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3/30/2025 6:32:43 PM</td>
-                                <td class="text-danger">Đang xử lý</td>
-                                <td>745,000 VND</td>
-                                <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                <td>
-                                    <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3/30/2025 6:32:43 PM</td>
-                                <td class="text-danger">Đang xử lý</td>
-                                <td>745,000 VND</td>
-                                <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                <td>
-                                    <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3/30/2025 6:32:43 PM</td>
-                                <td class="text-danger">Đang xử lý</td>
-                                <td>745,000 VND</td>
-                                <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                <td>
-                                    <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                </td>
-                            </tr>
+            <h2 class="text-center mb-4">Đơn Hàng Của Bạn</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ngày Đặt</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Tổng Tiền</th>
+                                    <th>Địa Chỉ Giao</th>
+                                    <th>Chi Tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
 
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <td>3/30/2025 6:32:43 PM</td>
+                                    <td class="text-danger">Đang xử lý</td>
+                                    <td>745,000 VND</td>
+                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
+                                    <td>
+                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
+                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3/30/2025 6:32:43 PM</td>
+                                    <td class="text-danger">Đang xử lý</td>
+                                    <td>745,000 VND</td>
+                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
+                                    <td>
+                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
+                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3/30/2025 6:32:43 PM</td>
+                                    <td class="text-danger">Đang xử lý</td>
+                                    <td>745,000 VND</td>
+                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
+                                    <td>
+                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
+                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3/30/2025 6:32:43 PM</td>
+                                    <td class="text-danger">Đang xử lý</td>
+                                    <td>745,000 VND</td>
+                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
+                                    <td>
+                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
+                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Fruits Shop End-->
+        <!-- Fruits Shop End-->
 
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-        <div class="container py-5">
-            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
-                <div class="row g-4">
-                    <div class="col-lg-3">
-                        <a href="#">
-                            <h1 class="text-danger mb-0">ShopTec</h1>
-                            <p class="text-secondary mb-0">Uy tín - Chất lượng</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number"
-                                placeholder="Your Email">
-                            <button type="submit"
-                                class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white"
-                                style="top: 0; right: 0;">Subscribe Now</button>
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+            <div class="container py-5">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <h1 class="text-danger mb-0">ShopTec</h1>
+                                <p class="text-secondary mb-0">Uy tín - Chất lượng</p>
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="position-relative mx-auto">
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number"
+                                    placeholder="Your Email">
+                                <button type="submit"
+                                    class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white"
+                                    style="top: 0; right: 0;">Subscribe Now</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="d-flex justify-content-end pt-3">
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
+                                        class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="d-flex justify-content-end pt-3">
-                            <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Why People Like us!</h4>
+                            <p class="mb-4">typesetting, remaining essentially unchanged. It was
+                                popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
+                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Shop Info</h4>
+                            <a class="btn-link" href="">About Us</a>
+                            <a class="btn-link" href="">Contact Us</a>
+                            <a class="btn-link" href="">Privacy Policy</a>
+                            <a class="btn-link" href="">Terms & Condition</a>
+                            <a class="btn-link" href="">Return Policy</a>
+                            <a class="btn-link" href="">FAQs & Help</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Account</h4>
+                            <a class="btn-link" href="">My Account</a>
+                            <a class="btn-link" href="">Shop details</a>
+                            <a class="btn-link" href="">Shopping Cart</a>
+                            <a class="btn-link" href="">Wishlist</a>
+                            <a class="btn-link" href="">Order History</a>
+                            <a class="btn-link" href="">International Orders</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Contact</h4>
+                            <p>Address: 1429 Netus Rd, NY 48247</p>
+                            <p>Email: Example@gmail.com</p>
+                            <p>Phone: +0123 4567 8910</p>
+                            <p>Payment Accepted</p>
+                            <img src="img/payment.png" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Why People Like us!</h4>
-                        <p class="mb-4">typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
-                        <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Shop Info</h4>
-                        <a class="btn-link" href="">About Us</a>
-                        <a class="btn-link" href="">Contact Us</a>
-                        <a class="btn-link" href="">Privacy Policy</a>
-                        <a class="btn-link" href="">Terms & Condition</a>
-                        <a class="btn-link" href="">Return Policy</a>
-                        <a class="btn-link" href="">FAQs & Help</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Account</h4>
-                        <a class="btn-link" href="">My Account</a>
-                        <a class="btn-link" href="">Shop details</a>
-                        <a class="btn-link" href="">Shopping Cart</a>
-                        <a class="btn-link" href="">Wishlist</a>
-                        <a class="btn-link" href="">Order History</a>
-                        <a class="btn-link" href="">International Orders</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Contact</h4>
-                        <p>Address: 1429 Netus Rd, NY 48247</p>
-                        <p>Email: Example@gmail.com</p>
-                        <p>Phone: +0123 4567 8910</p>
-                        <p>Payment Accepted</p>
-                        <img src="img/payment.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-    <!-- Footer End -->
+        <!-- Footer End -->
 
 
 
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-danger border-3 border-danger rounded-circle back-to-top"><i
-            class="fa fa-arrow-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-danger border-3 border-danger rounded-circle back-to-top"><i
+                class="fa fa-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/template/lib/easing/easing.min.js"></script>
-    <script src="assets/template/lib/waypoints/waypoints.min.js"></script>
-    <script src="assets/template/lib/lightbox/js/lightbox.min.js"></script>
-    <script src="assets/template/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/template/lib/easing/easing.min.js"></script>
+        <script src="assets/template/lib/waypoints/waypoints.min.js"></script>
+        <script src="assets/template/lib/lightbox/js/lightbox.min.js"></script>
+        <script src="assets/template/lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="assets/template/js/main.js"></script>
+        <!-- Template Javascript -->
+        <script src="assets/template/js/main.js"></script>
 
 </body>
 

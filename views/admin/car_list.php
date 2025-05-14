@@ -108,7 +108,7 @@
                 </ul>
             </nav>
         <?php endif; ?>
-        <p>Tong so xe: <?php echo"$totalCars" ?></p>
+        <p>Tổng số mẫu xe: <?php echo"$totalCars" ?></p>
         <!-- Nút thêm xe mới -->
         <div class="text-center mt-4">
             <a href="index.php?controller=CarAdmin&action=create" class="btn btn-success">

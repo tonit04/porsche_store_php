@@ -207,7 +207,7 @@
                                 <td></td>
                             </tr>
                         </tfoot>
-                        <a href="#" class="mt-2 btn border-danger rounded-pill px-4  text-danger text-center " type="button">Thanh toán</a>
+                        <a href="index.php?controller=Payment&action=index" class="mt-2 btn border-danger rounded-pill px-4  text-danger text-center " type="button">Thanh toán</a>
 
                     </div>
                 </div>

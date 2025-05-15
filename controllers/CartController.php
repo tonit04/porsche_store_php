@@ -33,8 +33,14 @@ class CartController
 
             if ($this->cart->addToCart($user_id, $car_id, $quantity, $price)) {
                 // Redirect back to the product page or wherever you want
-                header("Location: " . $_SERVER['HTTP_REFERER']);
+                header("Location: index.php?controller=cart&action=showCart");
                 exit();
+                // if (!empty($_SERVER['HTTP_REFERER'])) {
+                //     header("Location: " . $_SERVER['HTTP_REFERER']);
+                // } else {
+                //     header("Location: index.php?controller=cart&action=showCart");
+                // }
+                // exit();
             } else {
                 // Handle error (e.g., display a message)
                 echo "Failed to add to cart.";

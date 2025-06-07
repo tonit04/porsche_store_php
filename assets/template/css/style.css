@@ -649,4 +649,38 @@
     line-height: 35px;
 }
 
-/*** Footer End ***/
+
+/* Responsive Images */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+#car-models {
+    scroll-margin-top: 100px; /* Điều chỉnh giá trị này tùy theo chiều cao của header */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Style cho viền xe bán chạy */
+.porsche-product-card-border {
+    border-color: #e02f3c !important; /* Màu đỏ của Porsche, hơi nhạt hơn danger mặc định */
+    border-width: 1px !important; /* Đảm bảo độ dày 1px */
+    /* Tùy chọn: Thêm đổ bóng nhẹ nếu muốn hiệu ứng nổi */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ */
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà khi hover */
+}
+
+.porsche-product-card-border:hover {
+    border-color: #d5001c !important; /* Màu đỏ đậm hơn khi hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng mạnh hơn khi hover */
+    transform: translateY(-2px); /* Nâng nhẹ card lên khi hover */
+}
+
+/* Đảm bảo chữ giá bị gạch ngang đúng màu */
+.porsche-product-card-border s {    
+    color: #6c757d; /* Màu xám cho giá cũ */
+}

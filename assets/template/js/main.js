@@ -191,3 +191,24 @@ dots.forEach((li, key) => {
 window.onresize = function (event) {
     reloadSlider();
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Xử lý scroll mượt cho các anchor links
+    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            // Chỉ xử lý khi href bắt đầu bằng BASE_URL
+            if (this.href.startsWith(window.location.origin)) {
+                const targetId = this.getAttribute('href').split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+});

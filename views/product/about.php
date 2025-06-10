@@ -20,6 +20,24 @@ require_once __DIR__ . '/../../includes/header.php';
         </div>
     </div>
 
+    <!-- Website Features Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="mb-4">Về website </h2>
+            <p>
+                Chào mừng đến với Porsche Xe Hơi - Nơi trải nghiệm sự huy hoàng và đẳng cấp của thương hiệu xe hơi danh tiếng Porsche. Với mục tiêu mang đến cho bạn những trải nghiệm mua sắm xe hơi hoàn hảo nhất, chúng tôi tự hào giới thiệu đến bạn các dòng xe Porsche đỉnh cao về công nghệ và thiết kế.
+            </p>
+            <ul>
+                <li><strong>Danh sách xe Porsche đa dạng:</strong> Khám phá các mẫu xe Porsche từ các dòng 911, Cayenne, Panamera, đến các phiên bản đặc biệt như 918 Spyder và Taycan. Mỗi chiếc xe đều được trình bày với thông tin chi tiết về thông số kỹ thuật, hình ảnh và giá bán.</li>
+                <li><strong>Tính năng tìm kiếm nâng cao:</strong> Dễ dàng tìm kiếm xe theo nhu cầu của bạn với bộ lọc thông minh theo dòng xe, mức giá và tính năng đặc biệt.</li>
+                <li><strong>Tính năng đặt hàng trực tuyến:</strong> Đặt mua xe Porsche một cách thuận tiện và nhanh chóng trực tuyến. Quản lý đơn hàng và thanh toán an toàn qua các phương thức thanh toán đa dạng như thẻ tín dụng, chuyển khoản ngân hàng và ví điện tử.</li>
+                <li><strong>Tư vấn và hỗ trợ khách hàng:</strong> Nhận được sự tư vấn chuyên nghiệp từ đội ngũ hỗ trợ của chúng tôi về các sản phẩm và dịch vụ liên quan đến xe hơi Porsche.</li>
+                <li><strong>Bảo hành và bảo dưỡng:</strong> Cung cấp thông tin về các chương trình bảo hành, bảo dưỡng và chăm sóc xe để duy trì sự hoạt động êm ái và bền bỉ của chiếc xe của bạn.</li>
+                <li><strong>Tin tức và sự kiện:</strong> Cập nhật tin tức mới nhất về thị trường xe hơi, sự kiện của Porsche và các bài đánh giá chi tiết về các mẫu xe mới.</li>
+            </ul>
+        </div>
+    </div>
+
     <!-- Values Section -->
     <div class="row mb-5">
         <div class="col-12 text-center mb-4">

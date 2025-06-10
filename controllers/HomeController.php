@@ -2,6 +2,7 @@
 // REMOVED CONSTANT DEFINITIONS - They are now in index.php
 
 require_once __DIR__ . '/../models/Car.php';
+require_once __DIR__ . '/../models/Banner.php';
 
 class HomeController {
     public function index() {
@@ -18,6 +19,10 @@ class HomeController {
 
         // LẤY XE MỚI NHẤT CHO PHẦN DÒNG XE MỚI
         $latestCar = $carModel->getLatestCar();
+
+        // Lấy tất cả banner
+        $bannerModel = new Banner();
+        $banners = $bannerModel->getAll();
 
         // Load view home và truyền dữ liệu
         require_once __DIR__ . '/../views/home.php';

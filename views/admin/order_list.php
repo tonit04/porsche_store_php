@@ -7,10 +7,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+<style>
+    .menu-link {
+        align-items: center;
+        padding: 12px 20px;
+        text-decoration: none;
+        color: #666;
+        border-radius: 20px;
+        background-color: aqua;
+    }
+</style>
 
 <body class="bg-light">
 
     <div class="container-fluid py-5">
+        <div class="menu-item">
+            <a href="index.php?controller=Admin&action=dashboard" class="menu-link">
+                <span class="menu-text">Admin Dashboard</span>
+            </a>
+        </div>
         <h1 class="text-center mb-4">Danh sách đơn hàng</h1>
 
         <table class="table table-bordered table-hover align-middle">

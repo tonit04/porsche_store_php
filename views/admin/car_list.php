@@ -22,12 +22,25 @@
             color: red;
             font-weight: bold;
         }
+
+        .menu-link {
+            align-items: center;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: #666;
+            border-radius: 20px;
+            background-color: aqua;
+        }
     </style>
 </head>
 
 <body class="bg-light">
-
     <div class="container-fluid py-5">
+        <div class="menu-item">
+            <a href="index.php?controller=Admin&action=dashboard" class="menu-link">
+                <span class="menu-text">Admin Dashboard</span>
+            </a>
+        </div>
         <h1 class="text-center mb-4">Danh sách xe Porsche</h1>
 
         <table class="table table-bordered table-hover align-middle">
@@ -108,7 +121,7 @@
                 </ul>
             </nav>
         <?php endif; ?>
-        <p>Tổng số mẫu xe: <?php echo"$totalCars" ?></p>
+        <p>Tổng số mẫu xe: <?php echo "$totalCars" ?></p>
         <!-- Nút thêm xe mới -->
         <div class="text-center mt-4">
             <a href="index.php?controller=CarAdmin&action=create" class="btn btn-success">
@@ -116,9 +129,6 @@
             </a>
         </div>
     </div>
-
-
-
 </body>
 
 </html>

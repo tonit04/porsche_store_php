@@ -141,10 +141,22 @@
                         <span class="menu-text">Quản lý dòng xe</span>
                     </a>
                 </div>
-                 <div class="menu-item">
+                <div class="menu-item">
                     <a href="index.php?controller=BannerAdmin&action=index" class="menu-link">
                         <div class="menu-icon">🚞</div>
                         <span class="menu-text">Quản lý banner</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="index.php?controller=ContactAdmin&action=index" class="menu-link">
+                        <div class="menu-icon">👥</div>
+                        <span class="menu-text">Quản lý liên hệ</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="index.php?controller=FaqAdmin&action=index" class="menu-link">
+                        <div class="menu-icon">👥</div>
+                        <span class="menu-text">Quản lý FAQ</span>
                     </a>
                 </div>
 

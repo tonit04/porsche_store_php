@@ -21,9 +21,9 @@
 <body class="bg-light">
 
     <div class="container-fluid py-5">
-        <div class="menu-item">
-            <a href="index.php?controller=Admin&action=dashboard" class="menu-link">
-                <span class="menu-text">Admin Dashboard</span>
+        <div class="menu-item mb-3">
+            <a href="index.php?controller=Admin&action=dashboard" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại Dashboard
             </a>
         </div>
         <h1 class="text-center mb-4">Danh sách người dùng</h1>

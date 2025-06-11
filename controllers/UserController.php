@@ -121,11 +121,84 @@ class UserController
     }
     public function profile()
     {
-        if (!isset($_SESSION['user'])) {
-            header("Location: /login");
+        // 1. Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!isset($_SESSION['user_id'])) {
+            $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
+            header("Location: index.php?controller=User&action=login");
             exit;
         }
-        $user = $_SESSION['user'];
+
+        // 2. Lấy user_id từ session
+        $user_id = $_SESSION['user_id'];
+
+        // 3. Tạo một thể hiện của User model
+        $userModel = new User();
+
+        // 4. Lấy thông tin người dùng từ database
+        $user_data = $userModel->findById($user_id);
+
+        // 5. Lấy danh sách đơn hàng của người dùng từ database
+        $user_orders = $userModel->getUserOrders($user_id); // Gọi phương thức mới
+
+        // 6. Kiểm tra xem có tìm thấy người dùng không
+        if (!$user_data) {
+            $_SESSION['error_message'] = 'Không tìm thấy thông tin người dùng.';
+            header("Location: index.php?controller=Home&action=index");
+            exit;
+        }
+
+        // 7. Truyền dữ liệu người dùng và đơn hàng vào view profile.php
         include 'views/User/profile.php';
+    }
+    public function Orderdetails()
+    {
+        // 1. Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!isset($_SESSION['user_id'])) {
+            $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
+            header("Location: index.php?controller=User&action=login");
+            exit;
+        }
+
+        // 2. Lấy order_id từ URL
+        $order_id = $_GET['id'] ?? null;
+
+        if (!$order_id) {
+            $_SESSION['error_message'] = 'Mã đơn hàng không hợp lệ.';
+            header("Location: index.php?controller=User&action=profile"); // Chuyển hướng về trang profile nếu không có ID
+            exit;
+        }
+
+        $userModel = new User();
+
+        // 3. Lấy thông tin chính của đơn hàng
+        $order_info = $userModel->getSingleOrder($order_id);
+
+        // 4. Lấy chi tiết các sản phẩm trong đơn hàng
+        $order_details = $userModel->getOrderDetails($order_id);
+
+        // 5. Kiểm tra xem đơn hàng có tồn tại và thuộc về người dùng hiện tại không (quan trọng cho bảo mật)
+        if (!$order_info || $order_info['user_id'] != $_SESSION['user_id']) {
+            $_SESSION['error_message'] = 'Bạn không có quyền truy cập đơn hàng này hoặc đơn hàng không tồn tại.';
+            header("Location: index.php?controller=User&action=profile");
+            exit;
+        }
+
+        // 6. Tính toán phí ship và tổng cộng (nếu có logic phí ship)
+        // Ví dụ: phí ship cố định 30.000 VND
+        $shipping_fee = 30000;
+        $grand_total = $order_info['total_amount']; // total_amount đã bao gồm sản phẩm. Nếu bạn muốn hiển thị phí ship riêng và tổng cuối cùng, bạn có thể tính lại ở đây.
+        // Hoặc: $grand_total = $order_info['total_amount'] + $shipping_fee;
+
+        // 7. Truyền dữ liệu vào view
+        include 'views/User/Orderdetails.php';
+    }
+
+    // Bạn có thể thêm phương thức 'cancel' ở đây để xử lý việc hủy đơn hàng
+    public function cancel()
+    {
+        // ... (Logic hủy đơn hàng, cập nhật status trong bảng orders)
+        // Sau khi xử lý, chuyển hướng người dùng về trang profile hoặc một trang thông báo
+        header("Location: index.php?controller=User&action=profile");
+        exit;
     }
 }

@@ -35,6 +35,51 @@ class User
             VALUES (:username, :password, :email, :full_name, :phone, :address, :role, NOW(), NOW(), 1)");
         return $stmt->execute($data);
     }
+    public function getUserOrders($user_id)
+    {
+        // Lấy tất cả thông tin từ bảng orders cho user_id cụ thể
+        // Sắp xếp theo order_date giảm dần để hiển thị đơn hàng mới nhất trước
+        $sql = "SELECT
+                    o.id AS order_id,
+                    o.order_date,
+                    o.total_amount,
+                    o.status,
+                    o.payment_method,
+                    o.notes
+                FROM orders o
+                WHERE o.user_id = :user_id
+                ORDER BY o.order_date DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['user_id' => $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả đơn hàng dưới dạng mảng kết hợp
+    }
+
+    // Nếu bạn muốn hiển thị chi tiết từng sản phẩm trong mỗi đơn hàng
+    // bạn có thể thêm một phương thức khác để lấy order_details
+    public function getSingleOrder($order_id)
+    {
+        $sql = "SELECT * FROM orders WHERE id = :order_id LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['order_id' => $order_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về mảng kết hợp
+    }
+
+    // Lấy chi tiết từng sản phẩm trong một đơn hàng
+    public function getOrderDetails($order_id)
+    {
+        $sql = "SELECT
+                    od.quantity,
+                    c.name AS car_name,
+                    c.price AS current_car_price,
+                    c.image_url AS car_image,
+                    od.car_id -- Thêm car_id để dùng nếu cần
+                FROM order_details od
+                JOIN cars c ON od.car_id = c.id
+                WHERE od.order_id = :order_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['order_id' => $order_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getPaginated($limit, $offset)
     {

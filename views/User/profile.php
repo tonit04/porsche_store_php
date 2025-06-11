@@ -8,26 +8,17 @@ require_once __DIR__ . '/../../includes/header.php';
 
 
 
-    <!-- Single Page Header start -->
-    <div class="container-fluid  py-5">
-
-    </div>
-    <!-- Single Page Header End -->
-
-
-    <!-- Fruits Shop Start-->
-    <!-- Fruits Shop Start-->
+    <div class="container-fluid py-5"></div>
     <div class="container-fluid py-5">
-
-        <!-- Fruits Shop Start-->
         <div class="container mt-5">
             <h2 class="text-center mb-4">Thông Tin Cá Nhân</h2>
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title"><strong>Họ và Tên:</strong> Trần thị ;an</h5>
-                    <p class="card-text"><strong>Email:</strong> kh01@gmail.com</p>
-                    <p class="card-text"><strong>Số Điện Thoại:</strong> 0398926997</p>
-                    <p class="card-text"><strong>Địa Chỉ:</strong> 123 đường D, quận 4 TPHCM</p>
+                    <p class="card-text"><strong>Họ và Tên:</strong> <?php echo htmlspecialchars($user_data->full_name ?? 'N/A'); ?></p>
+                    <p class="card-text"><strong>Email:</strong> <?php echo htmlspecialchars($user_data->email ?? 'N/A'); ?></p>
+                    <p class="card-text"><strong>Số Điện Thoại:</strong> <?php echo htmlspecialchars($user_data->phone ?? 'N/A'); ?></p>
+                    <p class="card-text"><strong>Địa Chỉ:</strong> <?php echo htmlspecialchars($user_data->address ?? 'N/A'); ?></p>
+                    <a href="#">Đổi mật khẩu</a>
                 </div>
             </div>
 
@@ -38,75 +29,66 @@ require_once __DIR__ . '/../../includes/header.php';
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Ngày Đặt</th>
-                                    <th>Trạng Thái</th>
-                                    <th>Tổng Tiền</th>
-                                    <th>Địa Chỉ Giao</th>
-                                    <th>Chi Tiết</th>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Ngày đặt hàng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Địa chỉ giao hàng</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-
-                                <tr>
-                                    <td>3/30/2025 6:32:43 PM</td>
-                                    <td class="text-danger">Đang xử lý</td>
-                                    <td>745,000 VND</td>
-                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                    <td>
-                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3/30/2025 6:32:43 PM</td>
-                                    <td class="text-danger">Đang xử lý</td>
-                                    <td>745,000 VND</td>
-                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                    <td>
-                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3/30/2025 6:32:43 PM</td>
-                                    <td class="text-danger">Đang xử lý</td>
-                                    <td>745,000 VND</td>
-                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                    <td>
-                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3/30/2025 6:32:43 PM</td>
-                                    <td class="text-danger">Đang xử lý</td>
-                                    <td>745,000 VND</td>
-                                    <td> 140 Lê Trọng Tấn-1231-TPHCM</td>
-                                    <td>
-                                        <a href="" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                                        <a href="" class="btn btn-danger btn-sm">Hủy</a>
-                                    </td>
-                                </tr>
-
-
+                                <?php if (!empty($user_orders)): ?>
+                                    <?php foreach ($user_orders as $order): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($order['order_id'] ?? 'N/A'); ?></td>
+                                            <td><?php echo htmlspecialchars(date('d/m/Y H:i:s', strtotime($order['order_date'] ?? 'N/A'))); ?></td>
+                                            <td class="<?php
+                                                        // Thêm class màu sắc dựa trên trạng thái
+                                                        if (isset($order['status'])) {
+                                                            if ($order['status'] == 'Đã hoàn thành') {
+                                                                echo 'text-success';
+                                                            } elseif ($order['status'] == 'Đang xử lý') {
+                                                                echo 'text-warning'; // Sử dụng màu vàng cho đang xử lý
+                                                            } elseif ($order['status'] == 'Đã hủy') {
+                                                                echo 'text-danger';
+                                                            } else {
+                                                                echo 'text-info'; // Trạng thái khác
+                                                            }
+                                                        }
+                                                        ?>">
+                                                <?php echo htmlspecialchars($order['status'] ?? 'N/A'); ?>
+                                            </td>
+                                            <td><?php echo number_format($order['total_amount'] ?? 0, 0, ',', '.'); ?> VND</td>
+                                            <td><?php echo htmlspecialchars($order['shipping_address'] ?? 'N/A'); ?></td>
+                                            <td>
+                                                <a href="<?php echo BASE_URL; ?>index.php?controller=User&action=Orderdetails&id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-info btn-sm">Xem Chi Tiết</a>
+                                                <?php
+                                                // Chỉ hiển thị nút "Hủy" nếu trạng thái là "Đang xử lý" (hoặc trạng thái bạn muốn cho phép hủy)
+                                                if (isset($order['status']) && $order['status'] == 'Đang xử lý'): ?>
+                                                    <a href="<?php echo BASE_URL; ?>index.php?controller=Order&action=cancel&id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">Hủy</a>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Bạn chưa có đơn hàng nào.</td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Fruits Shop End-->
-
-
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-danger border-3 border-danger rounded-circle back-to-top"><i
-                class="fa fa-arrow-up"></i></a>
+    </div>
+    <a href="#" class="btn btn-danger border-3 border-danger rounded-circle back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
 
 
-        <!-- JavaScript Libraries -->
+
+    <!-- JavaScript Libraries -->
 
 </body>
 

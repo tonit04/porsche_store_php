@@ -1,7 +1,8 @@
 <?php
 require_once './models/Banner.php';
+require_once __DIR__ . '/BaseAdminController.php';
 
-class BannerAdminController
+class BannerAdminController extends BaseAdminController
 {
     public function index()
     {
@@ -94,4 +95,3 @@ class BannerAdminController
         require './views/admin/banner_create.php';
     }
 }
-?>

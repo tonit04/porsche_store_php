@@ -1,8 +1,9 @@
 <?php
 require_once './models/Order.php';
 require_once './models/OrderDetail.php';
+require_once __DIR__ . '/BaseAdminController.php';
 
-class OrderAdminController
+class OrderAdminController extends BaseAdminController
 {
     public function index()
     {
@@ -17,7 +18,7 @@ class OrderAdminController
         $offset = ($page - 1) * $limit;
 
         $orders = $order->getPaginated($limit, $offset); // Gọi hàm mới
-        $totalOrders = $order->countOrders(); 
+        $totalOrders = $order->countOrders();
         $totalPages = ceil($totalOrders / $limit);
 
         require_once './views/admin/order_list.php';
@@ -54,5 +55,3 @@ class OrderAdminController
         exit;
     }
 }
-
-?>

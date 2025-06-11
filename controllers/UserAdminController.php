@@ -1,7 +1,8 @@
 <?php
 require_once './models/User.php';
+require_once __DIR__ . '/BaseAdminController.php';
 
-class UserAdminController
+class UserAdminController extends BaseAdminController
 {
     public function index()
     {
@@ -53,5 +54,3 @@ class UserAdminController
         exit;
     }
 }
-
-?>

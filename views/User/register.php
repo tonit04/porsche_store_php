@@ -30,8 +30,9 @@
     <link href="assets/template/css/style.css" rel="stylesheet">
 </head>
 <?php
-    require_once __DIR__ . '/../../includes/header.php';
+require_once __DIR__ . '/../../includes/header.php';
 ?>
+
 <body>
 
     <!-- Spinner Start -->
@@ -91,6 +92,12 @@
                         <input name="phone" class="form-control" placeholder="Số điện thoại">
 
                     </div>
+                    <div class="mb-3">
+                        <label for="">Địa chỉ</label>
+                        <input name="address" class="form-control" placeholder="Địa chỉ">
+
+                    </div>
+
 
                     <button type="submit" class="btn btn-dark w-100">Đăng ký</button>
                 </form>
@@ -131,4 +138,4 @@
 
 </html>
 <?php
-    require_once __DIR__ . '/../../includes/footer.php';
+require_once __DIR__ . '/../../includes/footer.php';

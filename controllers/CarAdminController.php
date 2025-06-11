@@ -1,7 +1,8 @@
 <?php
 require_once './models/Car.php';
+require_once __DIR__ . '/BaseAdminController.php';
 
-class CarAdminController
+class CarAdminController extends BaseAdminController
 {
     public function index()
     {

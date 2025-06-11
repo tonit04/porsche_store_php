@@ -1,7 +1,7 @@
 <?php
 require_once './models/Category.php';
 
-class CategoryAdminController
+class CategoryAdminController extends BaseAdminController
 {
     public function index()
     {
@@ -91,4 +91,3 @@ class CategoryAdminController
         require './views/admin/category_create.php';
     }
 }
-?>

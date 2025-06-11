@@ -47,21 +47,20 @@ require_once __DIR__ . '/../../includes/header.php';
                                             <td class="<?php
                                                         // Thêm class màu sắc dựa trên trạng thái
                                                         if (isset($order['status'])) {
-                                                            if ($order['status'] == 'Đã hoàn thành') {
-                                                                echo 'text-success';
-                                                            } elseif ($order['status'] == 'Đang xử lý') {
-                                                                echo 'text-warning'; // Sử dụng màu vàng cho đang xử lý
-                                                            } elseif ($order['status'] == 'Đã hủy') {
-                                                                echo 'text-danger';
-                                                            } else {
-                                                                echo 'text-info'; // Trạng thái khác
-                                                            }
+
+                                                            echo 'text-success'; // Trạng thái khác
+
                                                         }
                                                         ?>">
-                                                <?php echo htmlspecialchars($order['status'] ?? 'N/A'); ?>
+                                                <?php
+                                                if ($order['status'] == 'Pending')
+                                                    echo htmlspecialchars('Đã xác nhận' ?? 'N/A');
+                                                else
+                                                    echo htmlspecialchars('Đã giao' ?? 'N/A');
+                                                ?>
                                             </td>
                                             <td><?php echo number_format($order['total_amount'] ?? 0, 0, ',', '.'); ?> VND</td>
-                                            <td><?php echo htmlspecialchars($order['shipping_address'] ?? 'N/A'); ?></td>
+                                            <td><?php echo htmlspecialchars($order['delivery_address'] ?? 'N/A'); ?></td>
                                             <td>
                                                 <a href="<?php echo BASE_URL; ?>index.php?controller=User&action=Orderdetails&id=<?php echo htmlspecialchars($order['order_id']); ?>" class="btn btn-info btn-sm">Xem Chi Tiết</a>
                                                 <?php

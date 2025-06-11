@@ -44,6 +44,7 @@ class User
                     o.order_date,
                     o.total_amount,
                     o.status,
+                    O.delivery_address,
                     o.payment_method,
                     o.notes
                 FROM orders o
@@ -158,5 +159,4 @@ class User
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute(['id' => $id]);
     }
-    
 }

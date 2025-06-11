@@ -78,7 +78,7 @@ require_once __DIR__ . '/../../includes/header.php';
                                     <tr>
                                         <td colspan="4" class="text-end"><b>TỔNG CỘNG:</b></td>
                                         <td>
-                                            <p><b><?php echo number_format($subtotal_products + 30000, 0, ',', '.'); ?> VND</b></p>
+                                            <p><b><?php echo number_format($subtotal_products, 0, ',', '.'); ?> VND</b></p>
                                         </td>
                                     </tr>
                                 <?php else: ?>

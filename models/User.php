@@ -21,12 +21,18 @@ class User
         $stmt->execute(['username' => $username]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function findByEmail($email)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function create($data)
     {
         $stmt = $this->conn->prepare("INSERT INTO users 
             (username, password, email, full_name, phone, address, role, created_at, updated_at, is_verified)
-            VALUES (:username, :password, :email, :full_name, :phone, :address, :role, NOW(), NOW(), 0)");
+            VALUES (:username, :password, :email, :full_name, :phone, :address, :role, NOW(), NOW(), 1)");
         return $stmt->execute($data);
     }
 

@@ -37,7 +37,7 @@ require_once __DIR__ . '/../../includes/header.php';
                         </button>
                     </div>
                 </form>
-                <a href="index.php?controller=User&action=register">Đăng ký</a>
+                <a style="text-decoration: none;" href="index.php?controller=User&action=forgotPassword">Quên mật khẩu</a>
 
             </div>
         </div>

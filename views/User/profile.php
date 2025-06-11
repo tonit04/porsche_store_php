@@ -4,7 +4,13 @@ require_once __DIR__ . '/../../includes/header.php';
 
 <body>
 
-
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="alert alert-success">
+            <?php echo $_SESSION['success_message']; ?>
+        </div>
+        <?php unset($_SESSION['success_message']); // Hủy session sau khi hiển thị 
+        ?>
+    <?php endif; ?>
 
 
 

@@ -312,9 +312,11 @@ class UserController
                     $_SESSION['user']['email'] = $email;
                     $_SESSION['user']['phone'] = $phone;
                     $_SESSION['user']['address'] = $address;
-                    $message = 'Cập nhật thông tin thành công!';
-                    // Cập nhật lại $user_data để hiển thị trên form sau khi submit thành công
-                    $user_data = $userModel->findById($user_id);
+
+                    // Lưu thông báo thành công vào session
+                    $_SESSION['success_message'] = 'Cập nhật thông tin thành công!';
+                    header('Location: index.php?controller=User&action=profile');
+                    exit;
                 } else {
                     $error = 'Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại.';
                 }
@@ -323,5 +325,39 @@ class UserController
 
         // Load view cập nhật thông tin
         include 'views/User/edit_profile.php';
+    }
+    public function forgotPassword()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $identifier = $_POST['identifier'] ?? '';
+
+            if (empty($identifier)) {
+                $_SESSION['error_message'] = 'Vui lòng nhập username hoặc email.';
+                header('Location: index.php?controller=User&action=forgotPassword');
+                exit;
+            }
+
+            $userModel = new User();
+            $result = $userModel->forgotPassword($identifier);
+
+            if ($result['success']) {
+                $_SESSION['success_message'] = $result['message'];
+                echo "<script>
+                    alert('Khôi phục mật khẩu thành công! Vui lòng đăng nhập lại.');
+                    setTimeout(function() {
+                        window.location.href = 'index.php?controller=User&action=login';
+                    }, 1000);
+                  </script>";
+                unset($_SESSION['success_message']); // Hủy session sau khi hiển thị
+                exit;
+            } else {
+                $_SESSION['error_message'] = $result['message'];
+                header('Location: index.php?controller=User&action=forgotPassword');
+                unset($_SESSION['error_message']); // Hủy session sau khi hiển thị
+                exit;
+            }
+        }
+
+        require_once __DIR__ . '/../views/User/forgot_password.php';
     }
 }

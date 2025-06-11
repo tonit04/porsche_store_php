@@ -1,5 +1,14 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require_once __DIR__ . '/../config/Database.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+
 
 class User
 {
@@ -158,5 +167,59 @@ class User
         $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute(['id' => $id]);
+    }
+    public function forgotPassword($identifier)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :identifier OR email = :identifier LIMIT 1");
+        $stmt->execute(['identifier' => $identifier]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return [
+                'success' => false,
+                'message' => 'Không tìm thấy tài khoản với thông tin đã cung cấp.'
+            ];
+        }
+
+        $newPassword = bin2hex(random_bytes(4));
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $updateStmt = $this->conn->prepare("UPDATE users SET password = :password, updated_at = NOW() WHERE id = :id");
+        $updateStmt->execute([
+            'password' => $hashedPassword,
+            'id' => $user['id']
+        ]);
+
+        // Gửi email bằng PHPMailer
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Máy chủ SMTP
+            $mail->SMTPAuth = true;
+            $mail->Username = 'duynguyen1918@gmail.com'; // Email của bạn
+            $mail->Password = 'nblv fuao dvrr zopd'; // Mật khẩu ứng dụng
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom('porschevietnam123@gmail.com', 'Porsche Store');
+            $mail->addAddress($user['email'], $user['full_name']);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Password recovery - Porsche Store';
+            $mail->Body = "Xin chào " . $user['full_name'] . ",<br><br>Mật khẩu mới của bạn là: <strong>" . $newPassword . "</strong><br><br>Vui lòng đăng nhập và đổi mật khẩu ngay.";
+
+            $mail->send();
+
+            return [
+                'success' => true,
+                'message' => 'Mật khẩu mới đã được gửi đến email của bạn.'
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Không thể gửi email. Lỗi: ' . $mail->ErrorInfo
+            ];
+        }
     }
 }

@@ -30,32 +30,30 @@
     <link href="assets/template/css/style.css" rel="stylesheet">
 </head>
 <?php
-    require_once __DIR__ . '/../../includes/header.php';
+require_once __DIR__ . '/../../includes/header.php';
 ?>
+
 <body>
 
-    <!-- Spinner Start -->
     <div id="spinner"
         class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" role="status"></div>
     </div>
-    <!-- Spinner End -->
-
-    <!-- Single Page Header start -->
-    <div class="container-fluid  py-5">
-
-    </div>
-    <!-- Single Page Header End -->
-
-
-    <!-- Fruits Shop Start-->
-    <!-- Fruits Shop Start-->
+    <div class="container-fluid  py-5"></div>
     <div class="container-fluid py-5">
-
         <div class="container mt-5 d-flex justify-content-center">
-            <!-- Đăng nhập -->
             <div class="col-md-5 border border-dark p-4 rounded shadow">
                 <h3 class="text-center">ĐĂNG NHẬP</h3>
+                <?php
+                // Hiển thị thông báo đăng ký thành công
+                if (isset($_SESSION['registration_success'])) {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                    echo htmlspecialchars($_SESSION['registration_success']);
+                    echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                    echo '</div>';
+                    unset($_SESSION['registration_success']); // Xóa thông báo sau khi hiển thị
+                }
+                ?>
                 <form method="POST">
                     <div class="text-danger">
                         <?php if (!empty($error)) echo "<p>$error</p>"; ?>
@@ -67,15 +65,12 @@
 
                     <div class="mb-3">
                         <input required name="password" type="password" class="form-control" placeholder="Mật khẩu">
-
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-dark w-50">
-                            Đăng
-                            nhập
+                            Đăng nhập
                         </button>
                     </div>
-
                 </form>
                 <a href="index.php?controller=User&action=register">Đăng ký</a>
                 <hr>
@@ -90,21 +85,8 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Đường kẻ giữa -->
-
         </div>
     </div>
-
-    <!-- Fruits Shop End-->
-
-
-
-
-
-
-
-    <!-- Back to Top -->
     <a href="#" class="btn btn-danger border-3 border-danger rounded-circle back-to-top"><i
             class="fa fa-arrow-up"></i></a>
 
@@ -125,4 +107,4 @@
 </html>
 
 <?php
-    require_once __DIR__ . '/../../includes/footer.php';
+require_once __DIR__ . '/../../includes/footer.php';

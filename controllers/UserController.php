@@ -104,6 +104,7 @@ class UserController
             ];
 
             if ($userModel->create($data)) {
+                $_SESSION['registration_success'] = 'Đăng ký tài khoản thành công! Vui lòng đăng nhập.';
                 header("Location: index.php?controller=User&action=login");
                 exit;
             } else {

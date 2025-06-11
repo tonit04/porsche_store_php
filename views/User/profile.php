@@ -18,7 +18,8 @@ require_once __DIR__ . '/../../includes/header.php';
                     <p class="card-text"><strong>Email:</strong> <?php echo htmlspecialchars($user_data->email ?? 'N/A'); ?></p>
                     <p class="card-text"><strong>Số Điện Thoại:</strong> <?php echo htmlspecialchars($user_data->phone ?? 'N/A'); ?></p>
                     <p class="card-text"><strong>Địa Chỉ:</strong> <?php echo htmlspecialchars($user_data->address ?? 'N/A'); ?></p>
-                    <a href="#">Đổi mật khẩu</a>
+                    <a href="<?php echo BASE_URL; ?>index.php?controller=User&action=changePassword" class="btn btn-primary">Đổi Mật Khẩu</a>
+                    <a href="<?php echo BASE_URL; ?>index.php?controller=User&action=editProfile" class="btn btn-success">Cập Nhật Thông Tin</a>
                 </div>
             </div>
 

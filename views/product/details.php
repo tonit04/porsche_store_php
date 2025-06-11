@@ -8,7 +8,6 @@ if (!empty($_SESSION['review_success'])): ?>
         <?= $_SESSION['review_success']; unset($_SESSION['review_success']); ?>
     </div>
 <?php endif; ?>
-?>
 
 <body>
     <!-- Single Product Start -->

@@ -364,4 +364,89 @@ class Car
             return [];
         }
     }
+
+    public function getFilteredAndPaginated($filters, $limit, $offset) 
+    {
+        $sql = "SELECT c.*, m.name as model_name 
+                FROM cars c
+                LEFT JOIN models m ON c.model_id = m.id
+                WHERE 1=1";
+        $params = [];
+
+        // Search by name
+        if (!empty($filters['search'])) {
+            $sql .= " AND (c.name LIKE :search OR m.name LIKE :search)";
+            $params[':search'] = "%{$filters['search']}%";
+        }
+
+        // Filter by price range
+        if (!empty($filters['min_price'])) {
+            $sql .= " AND c.price >= :min_price";
+            $params[':min_price'] = $filters['min_price'];
+        }
+        if (!empty($filters['max_price'])) {
+            $sql .= " AND c.price <= :max_price";
+            $params[':max_price'] = $filters['max_price'];
+        }
+
+        // Filter by category
+        if (!empty($filters['category_id'])) {
+            $sql .= " AND m.category_id = :category_id";
+            $params[':category_id'] = $filters['category_id'];
+        }
+
+        // Sorting
+        if (!empty($filters['sort'])) {
+            switch ($filters['sort']) {
+                case 'price_asc':
+                    $sql .= " ORDER BY c.price ASC";
+                    break;
+                case 'price_desc':
+                    $sql .= " ORDER BY c.price DESC";
+                    break;
+                case 'name_asc':
+                    $sql .= " ORDER BY c.name ASC";
+                    break;
+                case 'name_desc':
+                    $sql .= " ORDER BY c.name DESC";
+                    break;
+                default:
+                    $sql .= " ORDER BY c.id DESC";
+            }
+        } else {
+            $sql .= " ORDER BY c.id DESC";
+        }
+
+        $sql .= " LIMIT :limit OFFSET :offset";
+        $params[':limit'] = (int)$limit;
+        $params[':offset'] = (int)$offset;
+
+        $stmt = $this->conn->prepare($sql);
+        
+        // Bind tất cả params cùng một lúc
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+
+        $stmt->execute();
+        
+        $cars = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $car = new Car();
+            foreach ($row as $key => $value) {
+                if (property_exists($car, $key)) {
+                    $car->$key = $value;
+                }
+            }
+            // Thêm tên model
+            if (!is_object($car->model)) {
+                $car->model = new stdClass();
+            }
+            $car->model->name = $row['model_name'];
+            $cars[] = $car;
+        }
+        
+        return $cars;
+    }
+
 }

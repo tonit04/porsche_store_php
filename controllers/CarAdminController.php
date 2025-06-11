@@ -24,8 +24,9 @@ class CarAdminController extends BaseAdminController
         $offset = ($page - 1) * $limit;
 
         $cars = $car->getFilteredAndPaginated($filters, $limit, $offset);
-        $totalCars = $car->countCars();
-        $totalPages = ceil($totalCars / $limit);
+        $totalModels = $car->countModels();
+        $totalRows = $car->countRows();
+        $totalPages = ceil($totalRows / $limit);
 
         // Get categories for filter dropdown
         $categories = $car->getAllCategories();

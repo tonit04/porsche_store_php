@@ -31,10 +31,20 @@ class Car
 
         return $cars; // Trả về mảng các object Car
     }
+    public function countRows()
+    {
+        $stmt = $this->conn->query("SELECT COUNT(*) FROM cars");
+        return $stmt->fetchColumn();
+    }
+    public function countModels()
+    {
+        $stmt = $this->conn->query("SELECT COUNT(DISTINCT model_id) FROM cars");
+        return $stmt->fetchColumn();
+    }
     // Đếm tổng số xe
     public function countCars()
     {
-        $stmt = $this->conn->query("SELECT COUNT(*) FROM cars");
+        $stmt = $this->conn->query("SELECT sum(stock) FROM cars WHERE status = 'Active'");
         return $stmt->fetchColumn();
     }
 

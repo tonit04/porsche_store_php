@@ -40,6 +40,36 @@ class Order
         return $stmt->fetchColumn();
     }
 
+    public function getTotalRevenue()
+    {
+        $stmt = $this->conn->query("SELECT SUM(total_amount) FROM orders WHERE status = 'Confirmed'");
+        return $stmt->fetchColumn() ?? 0;
+    }
+
+    public function getRecentOrders($limit = 5)
+    {
+        $sql = "SELECT o.*, u.full_name 
+                FROM orders o
+                JOIN users u ON o.user_id = u.id
+                ORDER BY o.order_date DESC 
+                LIMIT :limit";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $orders = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $order = new Order();
+            foreach ($row as $key => $value) {
+                $order->$key = $value;
+            }
+            $order->user = (object)['full_name' => $row['full_name']];
+            $orders[] = $order;
+        }
+        return $orders;
+    }
+
     public function findById($id)
     {
         $sql = "SELECT * FROM orders WHERE id = :id";

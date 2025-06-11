@@ -3,13 +3,34 @@ require_once __DIR__ . '/../config/Database.php';
 class OrderDetail
 {
     public $id, $quantity, $price, $subtotal, $order_id, $car_id;
-    public $order, $car;
+    public $order, $car, $payment;
     private $conn;
 
     public function __construct()
     {
         $db = new Database();
         $this->conn = $db->connect();
+    }
+
+    public function getPaymentByOrderId($order_id) 
+    {
+        $sql = "SELECT * FROM payments WHERE order_id = :order_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['order_id' => $order_id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($data) {
+            $payment = new stdClass();
+            $payment->id = $data['id'];
+            $payment->order_id = $data['order_id'];
+            $payment->amount = $data['amount'];
+            $payment->payment_date = $data['payment_date'];
+            $payment->transaction_id = $data['transaction_id'];
+            $payment->payment_gateway = $data['payment_gateway'];
+            $payment->payment_status = $data['payment_status'];
+            return $payment;
+        }
+        return null;
     }
 
     public function findById($order_id)
@@ -27,6 +48,7 @@ class OrderDetail
             }
             $orderDetail->order = $this->getOrderByOrder_id($orderDetail->order_id);
             $orderDetail->car = $this->getCarByCar_id($orderDetail->car_id);
+            $orderDetail->payment = $this->getPaymentByOrderId($orderDetail->order_id); // Add this line
             $orderDetails[] = $orderDetail;
         }
 

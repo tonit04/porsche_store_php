@@ -5,179 +5,197 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .dashboard-card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 250px;
-            background-color: #fff;
-            border-right: 1px solid #ddd;
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            background-color: #4a90e2;
-            color: white;
-            text-align: center;
-        }
-
-        .sidebar-header h2 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .sidebar-header p {
-            font-size: 12px;
-        }
-
-        .sidebar-menu {
-            padding: 20px 0;
-        }
-
-        .menu-item {
-            margin-bottom: 5px;
-        }
-
-        .menu-link {
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
-            padding: 12px 20px;
-            text-decoration: none;
-            color: #666;
-        }
-
-        .menu-link:hover {
-            background-color: #f0f0f0;
-        }
-
-        .menu-link.active {
-            background-color: #4a90e2;
-            color: white;
-        }
-
-        .menu-icon {
-            margin-right: 10px;
-        }
-
-        .menu-text {
-            font-size: 14px;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .welcome-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .welcome-title {
+            justify-content: center;
             font-size: 24px;
-            color: #333;
-            margin-bottom: 15px;
         }
 
-        .welcome-subtitle {
-            font-size: 16px;
-            color: #666;
-            line-height: 1.5;
+        .sidebar {
+            min-height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            background-color: #f8f9fa;
+            min-height: 100vh;
         }
     </style>
 </head>
 
 <body>
-    <div class="dashboard-container">
-        <nav class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h2>Admin Panel</h2>
-                <p>Hệ thống quản trị</p>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0 bg-white sidebar">
+                <div class="d-flex flex-column">
+                    <div class="p-3 bg-primary text-white">
+                        <h4 class="mb-0">PORSCHE ADMIN</h4>
+                    </div>
+                    <div class="nav flex-column py-3">
+                        <a href="index.php?controller=CarAdmin" class="nav-link"><i class="bi bi-car-front"></i> Quản lý Xe
+                        </a>
+                        <a href="index.php?controller=OrderAdmin" class="nav-link"><i class="bi bi-cart"></i> Quản lý Đơn
+                            hàng</a>
+                        <a href="index.php?controller=UserAdmin" class="nav-link"><i class="bi bi-people"></i> Quản lý
+                            Users</a>
+                        <a href="index.php?controller=CategoryAdmin" class="nav-link"><i class="bi bi-tags"></i> Quản lý
+                            Dòng xe</a>
+                        <a href="index.php?controller=BannerAdmin" class="nav-link"><i class="bi bi-image"></i> Quản lý
+                            Banner</a>
+                        <a href="index.php?controller=ContactAdmin" class="nav-link"><i class="bi bi-envelope"></i>
+                            Quản lý Liên hệ</a>
+                        <a href="index.php?controller=FaqAdmin" class="nav-link"><i class="bi bi-question-circle"></i>
+                            Quản lý FAQ</a>
+                    </div>
+                </div>
             </div>
 
-            <div class="sidebar-menu">
-                <div class="menu-item">
-                    <a href="index.php?controller=CarAdmin&action=index" class="menu-link">
-                        <div class="menu-icon">🚗</div>
-                        <span class="menu-text">Quản lý Xe</span>
-                    </a>
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 px-4 py-4 main-content">
+                <!-- Stats Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="card-subtitle mb-2 text-muted">Tổng đơn hàng</h6>
+                                        <h4 class="card-title mb-0"><?= $totalOrders ?></h4>
+                                    </div>
+                                    <div class="stat-icon bg-primary text-white">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="card-subtitle mb-2 text-muted">Tổng users</h6>
+                                        <h4 class="card-title mb-0"><?= $totalUsers ?></h4>
+                                    </div>
+                                    <div class="stat-icon bg-success text-white">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="card-subtitle mb-2 text-muted">Tổng xe</h6>
+                                        <h4 class="card-title mb-0"><?= $totalCars ?></h4>
+                                    </div>
+                                    <div class="stat-icon bg-info text-white">
+                                        <i class="bi bi-car-front"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="card-subtitle mb-2 text-muted">Doanh thu</h6>
+                                        <h4 class="card-title mb-0"><?= number_format($totalRevenue, 0, ',', '.') ?> VNĐ</h4>
+                                    </div>
+                                    <div class="stat-icon bg-warning text-white">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="menu-item">
-                    <a href="index.php?controller=OrderAdmin&action=index" class="menu-link">
-                        <div class="menu-icon">📋</div>
-                        <span class="menu-text">Quản lý Đơn hàng</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <a href="index.php?controller=UserAdmin&action=index" class="menu-link">
-                        <div class="menu-icon">👥</div>
-                        <span class="menu-text">Quản lý Người dùng</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a href="index.php?controller=CategoryAdmin&action=index" class="menu-link">
-                        <div class="menu-icon">🚗</div>
-                        <span class="menu-text">Quản lý dòng xe</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a href="index.php?controller=BannerAdmin&action=index" class="menu-link">
-                        <div class="menu-icon">🚞</div>
-                        <span class="menu-text">Quản lý banner</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a href="index.php?controller=ContactAdmin&action=index" class="menu-link">
-                        <div class="menu-icon">👥</div>
-                        <span class="menu-text">Quản lý liên hệ</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a href="index.php?controller=FaqAdmin&action=index" class="menu-link">
-                        <div class="menu-icon">👥</div>
-                        <span class="menu-text">Quản lý FAQ</span>
-                    </a>
-                </div>
-
-            </div>
-        </nav>
-
-        <div class="main-content">
-
-            <div class="content-area">
-                <div class="welcome-card">
-                    <div class="welcome-content">
-                        <h2 class="welcome-title">Chào mừng đến với Admin Dashboard</h2>
-                        <p class="welcome-subtitle">
-                            Quản lý hệ thống một cách hiệu quả với giao diện hiện đại và dễ sử dụng.
-                            Chọn một mục trong thanh điều hướng hoặc xem tổng quan dưới đây.
-                        </p>
+                <!-- Recent Orders Table -->
+                <div class="card dashboard-card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Đơn hàng gần đây</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Khách hàng</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày đặt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($recentOrders as $order): ?>
+                                    <tr>
+                                        <td>#<?= $order->id ?></td>
+                                        <td><?= htmlspecialchars($order->user->full_name) ?></td>
+                                        <td><?= number_format($order->total_amount, 0, ',', '.') ?> VNĐ</td>
+                                        <td>
+                                            <span class="badge bg-<?= $order->status == 'Completed' ? 'success' : 'warning' ?>">
+                                                <?= htmlspecialchars($order->status) ?>
+                                            </span>
+                                        </td>
+                                        <td><?= date('d/m/Y', strtotime($order->order_date)) ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+    // Revenue Chart
+    const revenueChart = new Chart(document.getElementById('revenueChart'), {
+        type: 'line',
+        data: {
+            labels: <?= json_encode($revenueData['labels']) ?>,
+            datasets: [{
+                label: 'Doanh thu',
+                data: <?= json_encode($revenueData['values']) ?>,
+                borderColor: '#0d6efd',
+                tension: 0.1
+            }]
+        }
+    });
+
+    // Top Cars Chart
+    const topCarsChart = new Chart(document.getElementById('topCarsChart'), {
+        type: 'doughnut',
+        data: {
+            labels: <?= json_encode($topCarsData['labels']) ?>,
+            datasets: [{
+                data: <?= json_encode($topCarsData['values']) ?>,
+                backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#dc3545', '#6c757d']
+            }]
+        }
+    });
+    </script>
 
 </body>
 

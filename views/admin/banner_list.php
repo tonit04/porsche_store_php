@@ -22,8 +22,8 @@
 
     <div class="container-fluid py-5">
         <div class="menu-item mb-3">
-            <a href="index.php?controller=Admin&action=dashboard" class="menu-link ms-2">
-                <span class="menu-text">Admin Dashboard</span>
+            <a href="index.php?controller=Admin&action=dashboard" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại Dashboard
             </a>
         </div>
         <h1 class="text-center mb-4">Danh sách banner</h1>
@@ -47,8 +47,8 @@
                             <td><?= htmlspecialchars($banner->description) ?></td>
                             <td>
                                 <?php if (!empty($banner->image_url)): ?>
-                                    <img src="assets/images/banners/<?= htmlspecialchars($banner->image_url) ?>"
-                                        alt="Ảnh banner" style="max-width: 80px; max-height: 80px;">
+                                    <img src="assets/images/banners/<?= htmlspecialchars($banner->image_url) ?>" alt="Ảnh banner"
+                                        style="max-width: 80px; max-height: 80px;">
                                 <?php else: ?>
                                     <span class="text-muted">Không có ảnh</span>
                                 <?php endif; ?>

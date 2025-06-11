@@ -167,7 +167,12 @@ if (session_status() === PHP_SESSION_NONE) {
                         <li class="nav-item"><a class="nav-link" href="<?php echo rtrim(BASE_URL, '/'); ?>">Trang chủ</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>#car-models">Dòng xe</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=home&action=about">Giới thiệu</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>#Lien-he">Liên hệ</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=Contact&action=create">Liên hệ</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=Faq&action=index">FAQs</a>
+                        </li>
                     </ul>
                     <div class="d-flex align-items-center porsche-header-actions">
                         <form class="d-flex me-3" role="search" action="<?php echo rtrim(BASE_URL, '/'); ?>/index.php" method="GET">

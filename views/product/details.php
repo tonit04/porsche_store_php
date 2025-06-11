@@ -1,6 +1,13 @@
 <?php
 require_once __DIR__ . '/../../includes/header.php';
-?>
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!empty($_SESSION['review_success'])): ?>
+    <div class="alert alert-success text-center">
+        <?= $_SESSION['review_success']; unset($_SESSION['review_success']); ?>
+    </div>
+<?php endif; ?>
 
 <body>
     <!-- Single Product Start -->
@@ -16,16 +23,20 @@ require_once __DIR__ . '/../../includes/header.php';
                                 </div>
                                 <div class="images">
                                     <div class="small-img">
-                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>" onclick="showImg(this.src)">
+                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>"
+                                            onclick="showImg(this.src)">
                                     </div>
                                     <div class="small-img">
-                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>" onclick="showImg(this.src)">
+                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>"
+                                            onclick="showImg(this.src)">
                                     </div>
                                     <div class="small-img">
-                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>" onclick="showImg(this.src)">
+                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>"
+                                            onclick="showImg(this.src)">
                                     </div>
                                     <div class="small-img">
-                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>" onclick="showImg(this.src)">
+                                        <img src="assets/images/cars/<?= htmlspecialchars($car->image_url) ?>"
+                                            onclick="showImg(this.src)">
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +48,8 @@ require_once __DIR__ . '/../../includes/header.php';
                                 <input type="hidden" name="car_id" value="<?= htmlspecialchars($car->id) ?>">
                                 <input type="hidden" name="price" value="<?= htmlspecialchars($car->price) ?>">
                                 <h4 class="fw-bold mb-3 text-wrap"><?= htmlspecialchars($car->name) ?></h4>
-                                <h5 class="fw-bold mb-3"><?= number_format(htmlspecialchars($car->price), 0, ',', '.') ?> VNĐ</h5>
+                                <h5 class="fw-bold mb-3">
+                                    <?= number_format(htmlspecialchars($car->price), 0, ',', '.') ?> VNĐ</h5>
                                 <p class="mb-3">Dòng xe: <?= htmlspecialchars($car->model->name) ?> </p>
                                 <p class="mb-3">Màu sơn: <?= htmlspecialchars($car->color) ?> </p>
                                 <p class="mb-3">Sản xuất: <?= htmlspecialchars($car->year) ?> </p>
@@ -52,18 +64,22 @@ require_once __DIR__ . '/../../includes/header.php';
 
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                        <button type="button"
+                                            class="btn btn-sm btn-minus rounded-circle bg-light border">
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1" name="quantity">
+                                    <input type="text" class="form-control form-control-sm text-center border-0"
+                                        value="1" name="quantity">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                        <button type="button"
+                                            class="btn btn-sm btn-plus rounded-circle bg-light border">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <button class="btn border border-danger rounded-pill px-4 py-2 mb-4 text-danger"><i class="fa fa-shopping-bag me-2 text-danger"></i> Thêm vào giỏ</button>
+                                <button class="btn border border-danger rounded-pill px-4 py-2 mb-4 text-danger"><i
+                                        class="fa fa-shopping-bag me-2 text-danger"></i> Thêm vào giỏ</button>
                             </form>
                         </div>
                         <div class="col-lg-12">
@@ -154,46 +170,33 @@ require_once __DIR__ . '/../../includes/header.php';
                                 </div>
                                 <div class="tab-pane" id="nav-mission" role="tabpanel"
                                     aria-labelledby="nav-mission-tab">
-                                    <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                            style="width: 100px; height: 100px;" alt="">
-                                        <div class="">
-                                            <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                            <div class="d-flex justify-content-between">
-                                                <h5>Jason Smith</h5>
-                                                <div class="d-flex mb-3">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <p>The generated Lorem Ipsum is therefore always free from repetition
-                                                injected humour, or non-characteristic
-                                                words etc. Susp endisse ultricies nisi vel quam suscipit </p>
+                                    <?php
+                                    // Lấy danh sách review cho xe hiện tại
+                                    require_once __DIR__ . '/../../models/Review.php';
+                                    $reviewModel = new Review();
+                                    $reviews = $reviewModel->getByCar($car->id);
+                                    // Kiểm tra quyền đánh giá
+                                    if (session_status() === PHP_SESSION_NONE) {
+                                        session_start();
+                                    }
+                                    $showReviewBtn = false;
+                                    if (isset($_SESSION['user_id'])) {
+                                        $user_id = $_SESSION['user_id'];
+                                        // Đã mua xe và chưa từng đánh giá
+                                        if ($reviewModel->hasPurchased($user_id, $car->id) && !$reviewModel->getByUserAndCar($user_id, $car->id)) {
+                                            $showReviewBtn = true;
+                                        }
+                                    }
+                                    if ($showReviewBtn): ?>
+                                        <div class="mb-4">
+                                            <a href="index.php?controller=Review&action=create&car_id=<?= $car->id ?>"
+                                                class="btn btn-primary">
+                                                <i class="fa fa-star"></i> Viết đánh giá cho xe này
+                                            </a>
                                         </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                            style="width: 100px; height: 100px;" alt="">
-                                        <div class="">
-                                            <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                            <div class="d-flex justify-content-between">
-                                                <h5>Sam Peters</h5>
-                                                <div class="d-flex mb-3">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <p class="text-dark">The generated Lorem Ipsum is therefore always free from
-                                                repetition injected humour, or non-characteristic
-                                                words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                        </div>
-                                    </div>
+                                    <?php endif; ?>
+
+                                    <?php include __DIR__ . '/review_list.php'; ?>
                                 </div>
                                 <div class="tab-pane" id="nav-vision" role="tabpanel">
                                     <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et
@@ -276,3 +279,5 @@ require_once __DIR__ . '/../../includes/header.php';
 </html>
 <?php
 require_once __DIR__ . '/../../includes/footer.php';
+
+

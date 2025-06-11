@@ -8,17 +8,28 @@ class CarAdminController extends BaseAdminController
     {
         $car = new Car();
 
-        // Lấy số trang hiện tại từ URL, mặc định là 1
-        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-        if ($page < 1)
-            $page = 1;
+        // Get filters from URL
+        $filters = [
+            'search' => $_GET['search'] ?? '',
+            'min_price' => $_GET['min_price'] ?? '',
+            'max_price' => $_GET['max_price'] ?? '',
+            'category_id' => $_GET['category_id'] ?? '',
+            'sort' => $_GET['sort'] ?? ''
+        ];
 
-        $limit = 4; // Số xe mỗi trang
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        if ($page < 1) $page = 1;
+
+        $limit = 4;
         $offset = ($page - 1) * $limit;
 
-        $cars = $car->getPaginated($limit, $offset); // Gọi hàm mới
-        $totalCars = $car->countCars(); // Tổng số xe
-        $totalPages = ceil($totalCars / $limit);
+        $cars = $car->getFilteredAndPaginated($filters, $limit, $offset);
+        $totalModels = $car->countModels();
+        $totalRows = $car->countRows();
+        $totalPages = ceil($totalRows / $limit);
+
+        // Get categories for filter dropdown
+        $categories = $car->getAllCategories();
 
         require_once './views/admin/car_list.php';
     }

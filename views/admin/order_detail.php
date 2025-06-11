@@ -47,8 +47,53 @@
         </table>
         <div class="container">
             <?php if (!empty($orderDetails)): ?>
-                <div class="alert alert-success text-center fw-bold fs-5">
-                    Tổng tiền: <?= number_format($od->order->total_amount, 0, ',', '.') ?> VND
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="alert alert-success text-center fw-bold fs-5">
+                            Tổng tiền: <?= number_format($od->order->total_amount, 0, ',', '.') ?> VND
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <?php if ($od->payment): ?>
+                            <div class="card">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="mb-0">Thông tin thanh toán</h5>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <th>Mã giao dịch:</th>
+                                            <td><?= htmlspecialchars($od->payment->transaction_id) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Cổng thanh toán:</th>
+                                            <td><?= htmlspecialchars($od->payment->payment_gateway) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số tiền:</th>
+                                            <td><?= number_format($od->payment->amount, 0, ',', '.') ?> VND</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngày thanh toán:</th>
+                                            <td><?= date('d/m/Y H:i', strtotime($od->payment->payment_date)) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Trạng thái:</th>
+                                            <td>
+                                                <span class="badge <?= $od->payment->payment_status == 'Completed' ? 'bg-success' : 'bg-warning' ?>">
+                                                    <?= htmlspecialchars($od->payment->payment_status) ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <div class="alert alert-warning text-center">
+                                Chưa có thông tin thanh toán
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>

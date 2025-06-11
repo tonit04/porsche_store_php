@@ -1,20 +1,10 @@
-<!-- views/payment/success.php -->
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đặt hàng thành công - Porsche</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/porsche/assets/css/style.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+<!-- views/payment/checkout.php -->
+<?php
+require_once __DIR__ . '/../../includes/header.php';
+?>
 
 <body>
+
 
     <div class="container my-5">
         <div class="row justify-content-center">
@@ -78,6 +68,10 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
+                                                    <td colspan="3" class="text-end"><strong>Giảm giá:</strong></td>
+                                                    <td><strong><?= number_format($orderInfo->discount_applied) ?> VNĐ</strong></td>
+                                                </tr>
+                                                <tr>
                                                     <td colspan="3" class="text-end"><strong>Tổng cộng:</strong></td>
                                                     <td><strong><?= number_format($orderInfo->total_amount) ?> VNĐ</strong></td>
                                                 </tr>
@@ -88,8 +82,8 @@
                             </div>
                         </div>
                         <div class="text-center mt-4">
-                            <a href="/porsche/profile/orders" class="btn btn-outline-primary me-2">Xem đơn hàng của tôi</a>
-                            <a href="/porsche/" class="btn btn-primary">Tiếp tục mua sắm</a>
+                            <a href="/porsche_store_php/index.php?controller=User&action=Orderdetails&id=<?= $orderInfo->id ?>" class="btn btn-outline-primary me-2">Xem đơn hàng của tôi</a>
+                            <a href="/porsche_store_php/" class="btn btn-primary">Tiếp tục mua sắm</a>
                         </div>
                     </div>
                 </div>
@@ -97,10 +91,11 @@
         </div>
     </div>
 
-    <?php include __DIR__ . '/../layouts/footer.php'; ?>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+<?php
+require_once __DIR__ . '/../../includes/footer.php';

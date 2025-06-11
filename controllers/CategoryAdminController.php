@@ -1,5 +1,6 @@
 <?php
 require_once './models/Category.php';
+require_once __DIR__ . '/BaseAdminController.php';
 
 class CategoryAdminController extends BaseAdminController
 {

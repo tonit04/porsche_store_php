@@ -181,34 +181,39 @@ if (session_status() === PHP_SESSION_NONE) {
                             <input class="form-control search-input" name="keyword" type="search" placeholder="Tìm kiếm xe..." aria-label="Search" id="searchInput" autocomplete="off">
                         </form>
                         <div class="d-flex gap-2">
-                            <?php if (!isset($_SESSION['user_id'])): ?>
-                                <a href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=register" class="btn btn-danger btn-sm text-nowrap">
-                                    <i class="fas fa-user-plus me-1"></i> Đăng ký
-                                </a>
-                                <a href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=login" class="btn btn-outline-light btn-sm text-nowrap">
-                                    <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
-                                </a>
-                            <?php else: ?>
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-user me-1"></i> <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Tài khoản'); ?>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-                                        <li><a class="dropdown-item" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=profile">
-                                                <i class="fas fa-user-circle me-2"></i> Thông tin tài khoản
-                                            </a></li>
-                                        <li><a class="dropdown-item" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=Cart&action=ShowCart">
-                                                <i class="bi bi-bag-fill"></i> Giỏ hàng
-                                            </a></li>
-
-                                        <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item text-danger" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=logout">
-                                                <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
-                                            </a></li>
-                                    </ul>
-                                </div>
-                            <?php endif; ?>
+                           <?php
+ if (!isset($_SESSION['user_id'])): ?>
+    <a href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=register" class="btn btn-danger btn-sm text-nowrap">
+        <i class="fas fa-user-plus me-1"></i> Đăng ký
+    </a>
+    <a href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=login" class="btn btn-outline-light btn-sm text-nowrap">
+        <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
+    </a>
+<?php else: ?>
+    <div class="dropdown">
+        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user me-1"></i> <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Tài khoản'); ?>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
+            <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                <li><a class="dropdown-item" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=Admin&action=dashboard">
+                    <i class="fas fa-tools me-2"></i> Trang quản trị
+                </a></li>
+                <li><hr class="dropdown-divider"></li>
+            <?php endif; ?>
+            <li><a class="dropdown-item" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=profile">
+                <i class="fas fa-user-circle me-2"></i> Thông tin tài khoản
+            </a></li>
+            <li><a class="dropdown-item" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=Cart&action=ShowCart">
+                <i class="bi bi-bag-fill me-2"></i> Giỏ hàng
+            </a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=User&action=logout">
+                <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+            </a></li>
+        </ul>
+    </div>
+<?php endif; ?>
                         </div>
                     </div>
                 </div>

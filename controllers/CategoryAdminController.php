@@ -7,7 +7,7 @@ class CategoryAdminController extends BaseAdminController
     public function index()
     {
         $categoryModel = new Category();
-        $categories = $categoryModel->getAll();
+        $categories = $categoryModel->getAllCategories();
         require_once './views/admin/category_list.php';
     }
 

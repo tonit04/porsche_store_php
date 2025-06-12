@@ -4,10 +4,6 @@ require_once __DIR__ . '/../../includes/header.php';
 
 <body>
 
-
-
-
-
     <div class="container mt-5 py-5">
         <h2 class="text-center mb-4">Chi tiết đơn hàng</h2>
 

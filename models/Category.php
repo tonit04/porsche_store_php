@@ -13,7 +13,7 @@ class Category
         $this->conn = $db->connect();
     }
 
-    public function getAll()
+    public function getAllCategories()
     {
         $stmt = $this->conn->query("SELECT * FROM categories");
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

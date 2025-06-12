@@ -2,16 +2,19 @@
 // Assuming you have included the Database class and Cart model
 require_once 'config/Database.php';
 require_once 'models/Cart.php';
+require_once 'models/Car.php';
 
 class CartController
 {
     private $cart;
     private $db;
+    private $carModel;
 
     public function __construct()
     {
         $this->db = (new Database())->connect();
         $this->cart = new Cart($this->db);
+        $this->carModel = new Car();
     }
     private function checkLogin()
     {
@@ -28,19 +31,25 @@ class CartController
             // Assuming you're sending car_id, quantity, and price via POST
             $user_id = $_SESSION['user_id']; // Get user ID from session
             $car_id = $_POST['car_id'];
-            $quantity = $_POST['quantity'];
+            $quantity = (int)$_POST['quantity'];
             $price = $_POST['price']; // It's safer to fetch the price from the database
+
+            // Validate stock quantity
+            $car = $this->carModel->findById($car_id);
+            if (!$car || $quantity < 1 || $quantity > $car->stock) {
+                $_SESSION['add_to_cart_error'] = 'Số lượng đặt vượt quá số lượng tồn kho hoặc không hợp lệ.';
+                if (!empty($_SERVER['HTTP_REFERER'])) {
+                    header("Location: " . $_SERVER['HTTP_REFERER']);
+                } else {
+                    header("Location: index.php?controller=product&action=details&id=" . $car_id); // Fallback
+                }
+                exit();
+            }
 
             if ($this->cart->addToCart($user_id, $car_id, $quantity, $price)) {
                 // Redirect back to the product page or wherever you want
                 header("Location: index.php?controller=cart&action=showCart");
                 exit();
-                // if (!empty($_SERVER['HTTP_REFERER'])) {
-                //     header("Location: " . $_SERVER['HTTP_REFERER']);
-                // } else {
-                //     header("Location: index.php?controller=cart&action=showCart");
-                // }
-                // exit();
             } else {
                 // Handle error (e.g., display a message)
                 echo "Failed to add to cart.";
@@ -77,12 +86,28 @@ class CartController
                 }
             }
 
-            $newQuantity = max(1, $currentQuantity + $change); // Ensure quantity is never less than 1
+            $newQuantity = max(1, $currentQuantity + $change);
+
+            // Fetch car stock
+            $car = $this->carModel->findById($car_id);
+            if (!$car) {
+                $_SESSION['error'] = "Xe không tồn tại.";
+                $this->showCart();
+                return;
+            }
+
+            // Validate against car stock
+            if ($newQuantity > $car->stock) {
+                $_SESSION['error'] = "Số lượng không được vượt quá số lượng tồn kho (" . $car->stock . ").";
+                $this->showCart();
+                return;
+            }
 
             if ($this->cart->updateQuantity($user_id, $car_id, $newQuantity)) {
                 $this->showCart(); // Refresh the cart view
             } else {
-                echo "Failed to update quantity.";
+                $_SESSION['error'] = "Không thể cập nhật số lượng.";
+                $this->showCart();
             }
         }
     }

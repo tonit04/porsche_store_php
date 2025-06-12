@@ -168,7 +168,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <i class="bi bi-telephone-fill fs-4 text-danger me-3"></i>
                     <div>
                         <strong>Hotline</strong><br>
-                        0909xxxxxx <!-- Cập nhật hotline ví dụ -->
+                        1800 1234 <!-- Cập nhật hotline ví dụ -->
                     </div>
                 </div>
             </div>
@@ -177,7 +177,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <i class="bi bi-envelope-fill fs-4 text-danger me-3"></i>
                     <div>
                         <strong>Email</strong><br>
-                        info@porsche-vietnam.com <!-- Cập nhật email ví dụ -->
+                        porsche@gmail.vn <!-- Cập nhật email ví dụ -->
                     </div>
                 </div>
             </div>

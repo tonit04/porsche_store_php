@@ -53,7 +53,7 @@ if (!empty($_SESSION['review_success'])): ?>
                                 <p class="mb-3">Dòng xe: <?= htmlspecialchars($car->model->name) ?> </p>
                                 <p class="mb-3">Màu sơn: <?= htmlspecialchars($car->color) ?> </p>
                                 <p class="mb-3">Sản xuất: <?= htmlspecialchars($car->year) ?> </p>
-
+                                <p class="mb-3">Số lượng tồn kho: <span id="stockQuantity"><?= htmlspecialchars($car->stock) ?></span></p>
 
                                 <div class="my-4">
                                     <p class="mb-0">✔ Bảo hành động cơ 2 năm hoặc 50.000 km.</p>
@@ -70,7 +70,7 @@ if (!empty($_SESSION['review_success'])): ?>
                                         </button>
                                     </div>
                                     <input type="text" class="form-control form-control-sm text-center border-0"
-                                        value="1" name="quantity">
+                                        value="1" name="quantity" id="quantityInput" min="1" max="<?= htmlspecialchars($car->stock) ?>">
                                     <div class="input-group-btn">
                                         <button type="button"
                                             class="btn btn-sm btn-plus rounded-circle bg-light border">
@@ -78,6 +78,7 @@ if (!empty($_SESSION['review_success'])): ?>
                                         </button>
                                     </div>
                                 </div>
+                                <div id="stockAlert" class="alert alert-warning d-none" role="alert"></div>
                                 <button class="btn border border-danger rounded-pill px-4 py-2 mb-4 text-danger"><i
                                         class="fa fa-shopping-bag me-2 text-danger"></i> Thêm vào giỏ</button>
                             </form>
@@ -274,10 +275,65 @@ if (!empty($_SESSION['review_success'])): ?>
 
     <script src="assets/template/js/main.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInput = document.getElementById('quantityInput');
+            const stockQuantitySpan = document.getElementById('stockQuantity');
+            const stockAlert = document.getElementById('stockAlert');
+            const btnMinus = document.querySelector('.btn-minus');
+            const btnPlus = document.querySelector('.btn-plus');
+
+            let stock = parseInt(stockQuantitySpan.textContent);
+
+            function updateQuantity(amount) {
+                let currentQuantity = parseInt(quantityInput.value);
+                let newQuantity = currentQuantity + amount;
+
+                if (newQuantity < 1) {
+                    newQuantity = 1;
+                }
+
+                if (newQuantity > stock) {
+                    newQuantity = stock;
+                    stockAlert.textContent = 'Số lượng không được vượt quá số lượng tồn kho (' + stock + ').';
+                    stockAlert.classList.remove('d-none');
+                } else {
+                    stockAlert.classList.add('d-none');
+                }
+                quantityInput.value = newQuantity;
+            }
+
+            btnMinus.addEventListener('click', function() {
+                updateQuantity(-1);
+            });
+
+            btnPlus.addEventListener('click', function() {
+                updateQuantity(1);
+            });
+
+            quantityInput.addEventListener('change', function() {
+                let currentQuantity = parseInt(quantityInput.value);
+                if (isNaN(currentQuantity) || currentQuantity < 1) {
+                    currentQuantity = 1;
+                }
+                if (currentQuantity > stock) {
+                    currentQuantity = stock;
+                    stockAlert.textContent = 'Số lượng không được vượt quá số lượng tồn kho (' + stock + ').';
+                    stockAlert.classList.remove('d-none');
+                } else {
+                    stockAlert.classList.add('d-none');
+                }
+                quantityInput.value = currentQuantity;
+            });
+        });
+    </script>
+
+    <?php
+    require_once __DIR__ . '/../../includes/footer.php';
+    ?>
+
 </body>
 
 </html>
-<?php
-require_once __DIR__ . '/../../includes/footer.php';
 
 

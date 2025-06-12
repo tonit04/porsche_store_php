@@ -2,7 +2,7 @@
 
 class Database {
     private $host = "localhost";
-    private $db_name = "db_porsche_php";
+    private $db_name = "db_porsche";
     private $username = "root";
     private $password = "";
     private $port = 3306;

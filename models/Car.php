@@ -459,4 +459,176 @@ class Car
         return $cars;
     }
 
+    // Method to get filtered and paginated cars
+    public function getFilteredCars($categoryId = null, $sortBy = 'name_asc', $minPrice = null, $maxPrice = null, $year = null, $color = null, $engine = null, $limit = 4, $offset = 0)
+{
+    $sql = "SELECT c.*, m.name as model_name
+            FROM cars c
+            LEFT JOIN models m ON c.model_id = m.id
+            WHERE 1=1";
+    $queryParams = [];
+
+    if ($categoryId !== null) {
+        $sql .= " AND m.category_id = :category_id";
+        $queryParams[':category_id'] = $categoryId;
+    }
+
+    if (!empty($minPrice)) {
+        $sql .= " AND c.price >= :min_price";
+        $queryParams[':min_price'] = $minPrice;
+    }
+
+    if (!empty($maxPrice)) {
+        $sql .= " AND c.price <= :max_price";
+        $queryParams[':max_price'] = $maxPrice;
+    }
+
+    if (!empty($year)) {
+        $sql .= " AND c.year = :year";
+        $queryParams[':year'] = $year;
+    }
+
+    if (!empty($color)) {
+        $sql .= " AND c.color LIKE :color";
+        $queryParams[':color'] = '%' . $color . '%';
+    }
+
+    if (!empty($engine)) {
+        $sql .= " AND c.engine LIKE :engine";
+        $queryParams[':engine'] = '%' . $engine . '%';
+    }
+
+    // Sửa lại điều kiện sắp xếp
+    switch ($sortBy) {
+        case 'name_asc':
+            $sql .= " ORDER BY c.name ASC";
+            break;
+        case 'name_desc':
+            $sql .= " ORDER BY c.name DESC";
+            break;
+        case 'price_asc':
+            $sql .= " ORDER BY CAST(c.price AS DECIMAL) ASC";
+            break;
+        case 'price_desc':
+            $sql .= " ORDER BY CAST(c.price AS DECIMAL) DESC";
+            break;
+        default:
+            $sql .= " ORDER BY c.name ASC";
+            break;
+    }
+
+
+        // Directly concatenate LIMIT and OFFSET after casting to int
+        $sql .= " LIMIT " . (int)$limit . " OFFSET " . (int)$offset;
+
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind parameters (excluding LIMIT and OFFSET)
+        foreach ($queryParams as $key => $value) {
+            if ($key === ':category_id' || $key === ':year') {
+                $stmt->bindValue($key, $value, PDO::PARAM_INT);
+            } else if (strpos($key, 'price') !== false) {
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
+            } else {
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
+            }
+        }
+
+        $stmt->execute();
+
+        $dataList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $cars = [];
+        foreach ($dataList as $data) {
+            $car = new Car();
+            foreach ($data as $key => $value) {
+                if (property_exists($car, $key)) {
+                    $car->$key = $value;
+                }
+            }
+            // Assign model name if available from JOIN
+            if (isset($data['model_name'])) {
+                if (!is_object($car->model)) {
+                    $car->model = new stdClass();
+                }
+                $car->model->name = $data['model_name'];
+            }
+            $cars[] = $car;
+        }
+        return $cars;
+    }
+
+    // Method to count filtered cars
+    public function countFilteredCars($categoryId = null, $minPrice = null, $maxPrice = null, $year = null, $color = null, $engine = null)
+    {
+        $sql = "SELECT COUNT(c.id)
+                FROM cars c
+                LEFT JOIN models m ON c.model_id = m.id
+                WHERE 1=1";
+        $queryParams = [];
+
+        if ($categoryId !== null) {
+            $sql .= " AND m.category_id = :category_id";
+            $queryParams[':category_id'] = $categoryId;
+        }
+
+        if ($minPrice !== null && is_numeric($minPrice)) {
+            $sql .= " AND c.price >= :min_price";
+            $queryParams[':min_price'] = $minPrice;
+        }
+
+        if ($maxPrice !== null && is_numeric($maxPrice)) {
+            $sql .= " AND c.price <= :max_price";
+            $queryParams[':max_price'] = $maxPrice;
+        }
+
+        if ($year !== null && $year !== '') {
+            $sql .= " AND c.year = :year";
+            $queryParams[':year'] = $year;
+        }
+
+        if ($color !== null && $color !== '') {
+            $sql .= " AND c.color LIKE :color";
+            $queryParams[':color'] = '%' . $color . '%';
+        }
+
+        if ($engine !== null && $engine !== '') {
+            $sql .= " AND c.engine LIKE :engine";
+            $queryParams[':engine'] = '%' . $engine . '%';
+        }
+
+        // Add logging for debugging
+        error_log("DEBUG: countFilteredCars SQL: " . $sql);
+        error_log("DEBUG: countFilteredCars Params: " . print_r($queryParams, true));
+        
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind parameters
+        foreach ($queryParams as $key => $value) {
+            if ($key === ':category_id' || $key === ':year') {
+                $stmt->bindValue($key, $value, PDO::PARAM_INT);
+            } else if (strpos($key, 'price') !== false) {
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
+            } else {
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
+            }
+        }
+
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    public function getUniqueColors()
+    {
+        $sql = "SELECT DISTINCT color FROM cars ORDER BY color ASC";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function getUniqueEngines()
+    {
+        $sql = "SELECT DISTINCT engine FROM cars ORDER BY engine ASC";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
 }

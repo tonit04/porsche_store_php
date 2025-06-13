@@ -18,14 +18,14 @@ class ProductController
 
         if (!defined('BASE_ASSET_URL')) {
             if (defined('BASE_URL')) {
-                define('BASE_ASSET_URL', BASE_URL . 'public/assets/');
+                define('BASE_ASSET_URL', BASE_URL . 'assets/');
             } else {
                 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
                 $host = $_SERVER['HTTP_HOST'];
                 $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
                 if ($scriptPath === '/' || $scriptPath === '\\') $scriptPath = '';
                 $base_url_path = rtrim($scriptPath, '/');
-                define('BASE_ASSET_URL', $protocol . $host . $base_url_path . '/public/assets/');
+                define('BASE_ASSET_URL', $protocol . $host . $base_url_path . '/assets/');
             }
         }
     }
@@ -65,6 +65,7 @@ public function list() {
         // Get current page and filters
         $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ?: 1;
         $categoryId = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
+        error_log("DEBUG: Category ID from GET: " . var_export($categoryId, true));
         $sortBy = filter_input(INPUT_GET, 'sort_by', FILTER_SANITIZE_STRING) ?? 'name_asc';
         $minPrice = filter_input(INPUT_GET, 'min_price', FILTER_VALIDATE_FLOAT);
         $maxPrice = filter_input(INPUT_GET, 'max_price', FILTER_VALIDATE_FLOAT);

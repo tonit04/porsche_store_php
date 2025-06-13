@@ -468,6 +468,10 @@ class Car
             WHERE 1=1";
     $queryParams = [];
 
+    if (!empty($categoryId)) {
+        $sql .= " AND m.category_id = :category_id";
+        $queryParams[':category_id'] = $categoryId;
+    }
 
     if (!empty($minPrice)) {
         $sql .= " AND c.price >= :min_price";
@@ -477,6 +481,21 @@ class Car
     if (!empty($maxPrice)) {
         $sql .= " AND c.price <= :max_price";
         $queryParams[':max_price'] = $maxPrice;
+    }
+
+    if (!empty($year)) {
+        $sql .= " AND c.year = :year";
+        $queryParams[':year'] = $year;
+    }
+
+    if (!empty($color)) {
+        $sql .= " AND c.color LIKE :color";
+        $queryParams[':color'] = '%' . $color . '%';
+    }
+
+    if (!empty($engine)) {
+        $sql .= " AND c.engine LIKE :engine";
+        $queryParams[':engine'] = '%' . $engine . '%';
     }
 
     // Sửa lại điều kiện sắp xếp

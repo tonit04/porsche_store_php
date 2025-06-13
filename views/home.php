@@ -113,12 +113,12 @@ require_once __DIR__ . '/../includes/header.php';
                             // Xử lý ảnh cho category
                             $categoryImage = 'default-car.png'; // Ảnh mặc định
                             if (!empty($category->image_url)) {
-                                $imagePath = __DIR__ . '/../assets/images/cars/' . $category->image_url;
+                                $imagePath = __DIR__ . '/../assets/images/categories/' . $category->image_url;
                                 if (file_exists($imagePath)) {
                                     $categoryImage = $category->image_url;
                                 }
                             }
-                            $fullImagePath = BASE_URL . 'assets/images/cars/' . htmlspecialchars($categoryImage);
+                            $fullImagePath = BASE_URL . 'assets/images/categories/' . htmlspecialchars($categoryImage);
                             ?>
                             <a href="<?php echo BASE_URL; ?>index.php?controller=product&action=list&category_id=<?php echo htmlspecialchars($category->id); ?>"
                                 class="text-decoration-none">

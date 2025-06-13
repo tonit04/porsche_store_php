@@ -13,7 +13,7 @@ if ($scriptPath === '/' || $scriptPath === '\\') {
 $base_url_path = rtrim($scriptPath, '/');
 
 define('BASE_URL', $protocol . $host . $base_url_path . '/');
-define('BASE_ASSET_URL', BASE_URL . 'public/assets/');
+define('BASE_ASSET_URL', BASE_URL . 'assets/');
 // ==========================
 
 // Xử lý tham số URL

@@ -12,9 +12,22 @@
             <?php foreach ($searchResults as $car): ?>
                 <div class="col">
                     <div class="card h-100">
-                        <?php if (!empty($car['image_url'])): ?>
-                            <img src="<?php echo htmlspecialchars($car['image_url']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($car['full_name']); ?>">
-                        <?php endif; ?>
+                        <?php 
+                            $imageUrl = 'default-car.png'; // Ảnh mặc định
+                            if (!empty($car['image_url'])) {
+                                $imagePath = __DIR__ . '/../../assets/images/cars/' . $car['image_url'];
+                                if (file_exists($imagePath)) {
+                                    $imageUrl = $car['image_url'];
+                                }
+                            }
+                            $fullCarImagePath = BASE_ASSET_URL . 'images/cars/' . htmlspecialchars($imageUrl);
+                            error_log("DEBUG: BASE_ASSET_URL: " . BASE_ASSET_URL);
+                            error_log("DEBUG: Car image_url from DB: " . $car['image_url']);
+                            error_log("DEBUG: Constructed full image path: " . $fullCarImagePath);
+                        ?>
+                        <a href="<?php echo rtrim(BASE_URL, '/'); ?>/index.php?controller=Product&action=Details&id=<?php echo $car['id']; ?>">
+                            <img class="card-img-top p-3" src="<?php echo $fullCarImagePath; ?>" alt="<?php echo htmlspecialchars($car['name']); ?>" style="aspect-ratio: 4/3; object-fit: contain;"/>
+                        </a>
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($car['full_name']); ?></h5>
                             <p class="card-text">

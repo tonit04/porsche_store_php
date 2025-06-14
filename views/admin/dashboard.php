@@ -62,11 +62,34 @@
                         <a href="index.php?controller=FaqAdmin" class="nav-link"><i class="bi bi-question-circle"></i>
                             Quản lý FAQ</a>
                     </div>
+                    <div class="mt-auto border-top pt-3">
+                        <a href="index.php?controller=Home&action=index" class="nav-link text-danger">
+                            <i class="bi bi-box-arrow-right"></i> Trang chủ
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Main Content -->
             <div class="col-md-9 col-lg-10 px-4 py-4 main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="mb-0">Dashboard Overview</h4>
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center me-3">
+                            <i class="bi bi-person-circle fs-4 me-2"></i>
+                            <div>
+                                <small class="text-muted d-block">Xin chào,</small>
+                                <span class="fw-medium"><?= htmlspecialchars($_SESSION['username'] ?? 'Admin') ?></span>
+                            </div>
+                        </div>
+                        <div class="vr mx-3"></div>
+                        <div>
+                            <i class="bi bi-calendar3 me-2"></i>
+                            <span><?= date('d/m/Y') ?></span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Stats Cards -->
                 <div class="row g-4 mb-4">
                     <div class="col-md-3">

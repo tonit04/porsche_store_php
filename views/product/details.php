@@ -5,7 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 if (!empty($_SESSION['review_success'])): ?>
     <div class="alert alert-success text-center">
-        <?= $_SESSION['review_success']; unset($_SESSION['review_success']); ?>
+        <?= $_SESSION['review_success'];
+        unset($_SESSION['review_success']); ?>
     </div>
 <?php endif; ?>
 
@@ -280,8 +281,14 @@ if (!empty($_SESSION['review_success'])): ?>
             const quantityInput = document.getElementById('quantityInput');
             const stockQuantitySpan = document.getElementById('stockQuantity');
             const stockAlert = document.getElementById('stockAlert');
+
+            // Clone và thay thế các nút để tránh duplicate event listeners
             const btnMinus = document.querySelector('.btn-minus');
             const btnPlus = document.querySelector('.btn-plus');
+            const newBtnMinus = btnMinus.cloneNode(true);
+            const newBtnPlus = btnPlus.cloneNode(true);
+            btnMinus.parentNode.replaceChild(newBtnMinus, btnMinus);
+            btnPlus.parentNode.replaceChild(newBtnPlus, btnPlus);
 
             let stock = parseInt(stockQuantitySpan.textContent);
 
@@ -303,14 +310,18 @@ if (!empty($_SESSION['review_success'])): ?>
                 quantityInput.value = newQuantity;
             }
 
-            btnMinus.addEventListener('click', function() {
+            // Thêm stopPropagation cho các event listeners mới
+            newBtnMinus.addEventListener('click', function(e) {
+                e.stopPropagation();
                 updateQuantity(-1);
             });
 
-            btnPlus.addEventListener('click', function() {
+            newBtnPlus.addEventListener('click', function(e) {
+                e.stopPropagation();
                 updateQuantity(1);
             });
 
+            // Giữ nguyên event listener cho input
             quantityInput.addEventListener('change', function() {
                 let currentQuantity = parseInt(quantityInput.value);
                 if (isNaN(currentQuantity) || currentQuantity < 1) {
@@ -335,5 +346,3 @@ if (!empty($_SESSION['review_success'])): ?>
 </body>
 
 </html>
-
-

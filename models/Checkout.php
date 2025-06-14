@@ -115,7 +115,7 @@ class Checkout
 
 
     // Tạo URL thanh toán VNPAY
-    public function createVnpayUrl($order_id, $payment_id, $amount)
+    public function createVnpayUrl($order_id, $total, $cmt)
     {
         // Cấu hình VNPAY
         $vnp_TmnCode = "9HZKBNNN"; // Mã website tại VNPAY
@@ -132,7 +132,7 @@ class Checkout
         $vnp_TxnRef = $order_id . '-' . time(); // Mã đơn hàng + timestamp để tránh trùng lặp
         $vnp_OrderInfo = "Thanh toan don hang #" . $order_id;
         $vnp_OrderType = "billpayment";
-        $vnp_Amount = 90000000 * 100; // Số tiền * 100 (VNPAY yêu cầu)
+        $vnp_Amount =  $total * 100; // Số tiền * 100 (VNPAY yêu cầu)
         $vnp_Locale = "vn";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
 

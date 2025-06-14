@@ -14,7 +14,7 @@ class Order
 
     public function getPaginated($limit, $offset)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM orders LIMIT :limit OFFSET :offset");
+        $stmt = $this->conn->prepare("SELECT * FROM orders ORDER BY order_date DESC LIMIT :limit OFFSET :offset");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();

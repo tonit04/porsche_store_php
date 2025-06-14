@@ -31,7 +31,8 @@ class OrderAdminController extends BaseAdminController
         $order = $order->findById($id);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $order->update($id, $_POST);
-            header('Location: index.php?controller=OrderAdmin');
+            $page = $_GET['page'] ?? 1;
+            header('Location: index.php?controller=OrderAdmin&page=' . $page);
             exit;
         }
         require_once './views/admin/order_update.php';

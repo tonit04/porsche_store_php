@@ -164,8 +164,8 @@
                     </td>
                     <td><?= htmlspecialchars($car->description) ?></td>
                     <td>
-                        <a href="index.php?controller=CarAdmin&action=update&id=<?= $car->id ?>"
-                            class="btn btn-sm btn-warning mb-1">Sửa</a>
+                        <a href="index.php?controller=CarAdmin&action=update&id=<?= $car->id ?>&page=<?= $_GET['page'] ?? 1 ?>"
+                            class="btn btn-primary btn-sm">Sửa</a>
                         <a href="index.php?controller=CarAdmin&action=delete&id=<?= $car->id ?>"
                             class="btn btn-sm btn-danger"
                             onclick="return confirm('Bạn có chắc muốn xóa xe này?')">Xóa</a>

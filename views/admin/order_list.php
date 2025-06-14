@@ -55,8 +55,12 @@
                             <td><?= htmlspecialchars($order->payment_method) ?></td>
                             <td><?= htmlspecialchars($order->note) ?></td>
                             <td>
-                                <a href="index.php?controller=OrderAdmin&action=detail&id=<?= $order->id ?>"
-                                    class="btn btn-sm btn-warning mb-1">Xem chi tiết</a>
+                                <a href="index.php?controller=OrderAdmin&action=detail&id=<?= $order->id ?>&page=<?= $_GET['page'] ?? 1 ?>"
+                                    class="btn btn-sm btn-info mb-1">Xem chi tiết</a>
+                     
+                                <a href="index.php?controller=OrderAdmin&action=update&id=<?= $order->id ?>&page=<?= $_GET['page'] ?? 1 ?>"
+                                    class="btn btn-sm btn-warning mb-1">Sửa</a>
+                             
                             </td>
                         </tr>
                     <?php endforeach; ?>

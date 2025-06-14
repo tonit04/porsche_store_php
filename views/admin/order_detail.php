@@ -98,7 +98,7 @@
             <?php endif; ?>
         </div>
         <div class="text-end">
-            <a href="index.php?controller=OrderAdmin&action=index" class="btn btn-secondary">Quay lại</a>
+            <a href="index.php?controller=OrderAdmin&page=<?= htmlspecialchars($_GET['page'] ?? 1) ?>" class="btn btn-secondary">Quay lại</a>
         </div>
     </div>
 </body>

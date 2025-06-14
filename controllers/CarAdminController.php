@@ -53,7 +53,6 @@ class CarAdminController extends BaseAdminController
             // Tạo xe mới
             $car = new Car();
             $car->create($_POST, $imageUrl);
-
             // Redirect về trang danh sách xe
             header('Location: index.php?controller=CarAdmin');
             exit;
@@ -87,7 +86,8 @@ class CarAdminController extends BaseAdminController
                 $imageUrl = $car->image_url;
             }
             $car->update($id, $_POST, $imageUrl);
-            header('Location: index.php?controller=CarAdmin');
+            $page = $_GET['page'] ?? 1;
+            header('Location: index.php?controller=CarAdmin&page=' . $page);
             exit;
         }
         $models = $car->getAllModels();

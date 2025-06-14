@@ -116,7 +116,7 @@
 
             <div class="text-end">
                 <button type="submit" class="btn btn-success">Lưu thay đổi</button>
-                <a href="index.php?controller=CarAdmin&action=index" class="btn btn-secondary">Hủy</a>
+                <a href="index.php?controller=CarAdmin&page=<?= htmlspecialchars($_GET['page'] ?? 1) ?>" class="btn btn-secondary">Quay lại</a>
             </div>
         </form>
     </div>

@@ -97,6 +97,13 @@ class Order
             'id' => $id,
             'status' => $data['status']
         ]);
+
+        // Nếu trạng thái đơn hàng là Cancelled thì cập nhật payment thành failed
+        if ($data['status'] === 'Cancelled') {
+            $sqlPayment = "UPDATE payments SET payment_status = 'failed' WHERE order_id = :order_id";
+            $stmtPayment = $this->conn->prepare($sqlPayment);
+            $stmtPayment->execute(['order_id' => $id]);
+        }
     }
 
     public function delete($id)
